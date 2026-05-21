@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Our Team – Eco Healing Accessories</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --green-deep:   #1a3d2b;
+      --green-mid:    #2e7d52;
+      --green-bright: #3cb371;
+      --green-light:  #a8d5b5;
+      --green-pale:   #e8f5ee;
+      --gold:         #c8a84b;
+      --gold-pale:    #f7f0dc;
+      --white:        #f9fdf9;
+      --text-dark:    #0d1f17;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+    h1,h2,h3,h4 { font-family: 'Playfair Display', serif; }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      background: var(--green-deep);
+      padding: 1rem 2rem;
+      position: sticky; top: 0; z-index: 1000;
+      border-bottom: 2px solid var(--gold);
+    }
+    .navbar-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; color: var(--white) !important; letter-spacing: .03em;
+    }
+    .navbar-brand span { color: var(--gold); }
+    .nav-link {
+      color: var(--green-light) !important; font-weight: 500;
+      font-size: .9rem; letter-spacing: .04em; text-transform: uppercase; transition: color .25s;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--gold) !important; }
+    .nav-cta {
+      background: var(--gold); color: var(--green-deep) !important;
+      border-radius: 30px; padding: .45rem 1.3rem !important; font-weight: 600;
+    }
+    .nav-cta:hover { background: var(--green-bright); color: var(--white) !important; }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: linear-gradient(135deg, var(--green-deep) 0%, #254d38 55%, #1e5c3c 100%);
+      padding: 7rem 0 5rem;
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232e7d52' fill-opacity='0.18'%3E%3Cpath d='M40 40c0-11 9-20 20-20s20 9 20 20-9 20-20 20-20-9-20-20zm-40 0c0-11 9-20 20-20S40 29 40 40 31 60 20 60 0 51 0 40z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: .35;
+    }
+    .page-hero::after {
+      content: '👥';
+      position: absolute; font-size: 24rem;
+      right: -2rem; bottom: -4rem;
+      opacity: .05; pointer-events: none;
+    }
+    .breadcrumb-nav {
+      display: flex; align-items: center; gap: .5rem;
+      margin-bottom: 1.5rem; animation: fadeDown .7s ease both;
+    }
+    .breadcrumb-nav a { color: var(--green-light); font-size: .85rem; text-decoration: none; transition: color .2s; }
+    .breadcrumb-nav a:hover { color: var(--gold); }
+    .breadcrumb-nav span { color: var(--gold); font-size: .85rem; }
+    .breadcrumb-nav i { color: var(--green-light); font-size: .7rem; }
+    .page-hero h1 {
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      color: var(--white); line-height: 1.15;
+      animation: fadeDown .85s .1s ease both;
+    }
+    .page-hero h1 span { color: var(--gold); }
+    .page-hero-sub {
+      color: var(--green-light); font-size: 1.05rem; font-weight: 300;
+      max-width: 540px; line-height: 1.75; margin-top: 1.2rem;
+      animation: fadeDown 1s .2s ease both;
+    }
+    .hero-stat-row {
+      display: flex; flex-wrap: wrap; gap: 2.5rem;
+      margin-top: 3rem; animation: fadeDown 1s .35s ease both;
+    }
+    .hero-stat .num {
+      font-family: 'Playfair Display', serif; font-size: 2.4rem;
+      font-weight: 900; color: var(--gold); line-height: 1;
+    }
+    .hero-stat .label {
+      font-size: .8rem; color: var(--green-light);
+      text-transform: uppercase; letter-spacing: .08em; margin-top: .3rem;
+    }
+    .hero-stat-divider { width: 1px; background: rgba(255,255,255,.15); align-self: stretch; }
+
+    /* ── SECTION COMMONS ── */
+    .section-label {
+      display: inline-block; color: var(--green-mid); font-size: .78rem;
+      font-weight: 700; text-transform: uppercase; letter-spacing: .14em;
+      border-left: 3px solid var(--green-bright); padding-left: .7rem; margin-bottom: 1rem;
+    }
+
+    /* ── LEADERSHIP SECTION ── */
+    .leadership-section { padding: 6rem 0; background: var(--white); }
+
+    .leader-card {
+      background: var(--white);
+      border-radius: 28px;
+      overflow: hidden;
+      border: 1px solid rgba(46,125,82,.12);
+      transition: transform .4s cubic-bezier(.17,.67,.3,1.15), box-shadow .4s;
+      height: 100%;
+      position: relative;
+    }
+    .leader-card:hover {
+      transform: translateY(-10px) scale(1.01);
+      box-shadow: 0 30px 70px rgba(26,61,43,.14);
+    }
+    .leader-card::before {
+      content: '';
+      position: absolute; top: 0; left: 0; right: 0; height: 5px;
+      background: linear-gradient(90deg, var(--green-bright), var(--gold));
+      z-index: 2;
+    }
+
+    .leader-img-wrap {
+      background: linear-gradient(160deg, var(--green-deep) 0%, #2a6645 50%, var(--green-mid) 100%);
+      height: 260px;
+      display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .leader-img-wrap::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 40%, rgba(200,168,75,.18), transparent 55%);
+    }
+    .leader-img-wrap::after {
+      content: '';
+      position: absolute; bottom: -1px; left: 0; right: 0; height: 60px;
+      background: linear-gradient(to top, var(--white), transparent);
+      z-index: 1;
+    }
+    .leader-img-wrap img {
+      width: 150px; height: 150px; border-radius: 50%;
+      object-fit: cover; object-position: top;
+      border: 5px solid rgba(255,255,255,.25);
+      box-shadow: 0 8px 32px rgba(0,0,0,.25);
+      position: relative; z-index: 0;
+      transition: transform .4s;
+    }
+    .leader-card:hover .leader-img-wrap img { transform: scale(1.05); }
+
+    .leader-body { padding: 1.8rem; text-align: center; }
+    .leader-body h4 {
+      font-family: 'DM Sans', sans-serif; font-weight: 700;
+      font-size: 1.15rem; margin-bottom: .4rem; color: var(--text-dark);
+    }
+    .leader-role {
+      display: inline-block;
+      background: var(--green-pale); color: var(--green-mid);
+      font-size: .72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .1em; border-radius: 20px; padding: .25rem 1rem;
+      margin-bottom: 1rem;
+    }
+    .leader-body p { font-size: .86rem; color: #4a6357; line-height: 1.7; margin-bottom: 1.2rem; }
+
+    .leader-social { display: flex; justify-content: center; gap: .6rem; }
+    .leader-social a {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 34px; height: 34px;
+      border-radius: 50%;
+      background: var(--green-pale);
+      color: var(--green-mid);
+      font-size: .95rem;
+      text-decoration: none;
+      transition: all .25s;
+      border: 1px solid rgba(46,125,82,.15);
+    }
+    .leader-social a:hover { background: var(--green-mid); color: var(--white); transform: translateY(-2px); }
+
+    /* ── CHAIRMAN FEATURED CARD ── */
+    .chairman-wrap {
+      background: linear-gradient(135deg, var(--green-deep), #254d38);
+      border-radius: 28px; overflow: hidden;
+      border: 2px solid var(--gold);
+      position: relative;
+      box-shadow: 0 24px 64px rgba(26,61,43,.2);
+    }
+    .chairman-wrap::before {
+      content: ''; position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232e7d52' fill-opacity='0.12'%3E%3Cpath d='M30 30c0-8.3 6.7-15 15-15s15 6.7 15 15-6.7 15-15 15-15-6.7-15-15zm-30 0c0-8.3 6.7-15 15-15s15 6.7 15 15-6.7 15-15 15S0 38.3 0 30z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+    .chairman-inner { position: relative; z-index: 1; padding: 3rem; }
+    .chairman-img {
+      width: 160px; height: 160px; border-radius: 50%;
+      object-fit: cover; object-position: top;
+      border: 5px solid var(--gold);
+      box-shadow: 0 0 0 8px rgba(200,168,75,.15);
+      display: block; margin: 0 auto 1.5rem;
+    }
+    .chairman-badge {
+      display: inline-block;
+      background: var(--gold); color: var(--green-deep);
+      font-size: .72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .12em; border-radius: 20px; padding: .3rem 1.1rem;
+      margin-bottom: .8rem;
+    }
+    .chairman-inner h3 { color: var(--white); font-size: 1.7rem; margin-bottom: .3rem; }
+    .chairman-title { color: var(--gold); font-size: .85rem; font-weight: 600; text-transform: uppercase; letter-spacing: .1em; margin-bottom: 1.2rem; }
+    .chairman-inner p { color: var(--green-light); font-size: .9rem; line-height: 1.75; }
+    .chairman-inner blockquote {
+      border-left: 3px solid var(--gold);
+      padding-left: 1.2rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+      color: rgba(168,213,181,.9);
+      font-size: .95rem;
+      line-height: 1.7;
+    }
+    .chairman-social { display: flex; gap: .6rem; margin-top: 1.5rem; flex-wrap: wrap; }
+    .chairman-social a {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(255,255,255,.1); color: var(--green-light);
+      font-size: 1rem; text-decoration: none; transition: all .25s;
+      border: 1px solid rgba(255,255,255,.15);
+    }
+    .chairman-social a:hover { background: var(--gold); color: var(--green-deep); }
+
+    /* ── DEPARTMENT TABS ── */
+    .dept-section { padding: 6rem 0; background: var(--green-pale); }
+    .dept-tabs {
+      display: flex; flex-wrap: wrap; gap: .75rem;
+      justify-content: center; margin-bottom: 3.5rem;
+    }
+    .dept-tab {
+      background: var(--white); color: var(--green-mid);
+      border: 2px solid rgba(46,125,82,.18);
+      border-radius: 30px; padding: .55rem 1.5rem;
+      font-size: .85rem; font-weight: 600; cursor: pointer;
+      transition: all .25s; display: flex; align-items: center; gap: .5rem;
+      text-transform: uppercase; letter-spacing: .06em;
+    }
+    .dept-tab:hover, .dept-tab.active {
+      background: var(--green-mid); color: var(--white); border-color: var(--green-mid);
+    }
+    .dept-tab .dept-count {
+      background: var(--green-pale); color: var(--green-mid);
+      border-radius: 50%; width: 22px; height: 22px;
+      display: inline-flex; align-items: center; justify-content: center;
+      font-size: .72rem; font-weight: 700;
+    }
+    .dept-tab.active .dept-count { background: rgba(255,255,255,.2); color: var(--white); }
+
+    .staff-card {
+      background: var(--white); border-radius: 20px;
+      overflow: hidden; border: 1px solid rgba(46,125,82,.12);
+      transition: transform .3s, box-shadow .3s; height: 100%;
+    }
+    .staff-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(26,61,43,.1); }
+    .staff-img {
+      background: linear-gradient(135deg, var(--green-deep), var(--green-mid));
+      height: 190px; display: flex; align-items: center; justify-content: center;
+      position: relative; overflow: hidden;
+    }
+    .staff-img img {
+      width: 120px; height: 120px; border-radius: 50%;
+      object-fit: cover; object-position: top;
+      border: 4px solid rgba(255,255,255,.2);
+    }
+    .staff-img .dept-tag {
+      position: absolute; top: .75rem; right: .75rem;
+      background: rgba(200,168,75,.2); color: var(--gold);
+      border: 1px solid rgba(200,168,75,.4);
+      font-size: .68rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .08em; border-radius: 12px; padding: .2rem .65rem;
+    }
+    .staff-body { padding: 1.3rem; text-align: center; }
+    .staff-body h6 { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: .3rem; }
+    .staff-role-badge {
+      display: inline-block; background: var(--green-pale); color: var(--green-mid);
+      font-size: .7rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .08em; border-radius: 16px; padding: .2rem .8rem; margin-bottom: .7rem;
+    }
+    .staff-body p { font-size: .82rem; color: #4a6357; line-height: 1.6; margin-bottom: .9rem; }
+    .staff-social { display: flex; justify-content: center; gap: .5rem; }
+    .staff-social a {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 30px; height: 30px; border-radius: 50%;
+      background: var(--green-pale); color: var(--green-mid);
+      font-size: .85rem; text-decoration: none; transition: all .2s;
+    }
+    .staff-social a:hover { background: var(--green-mid); color: var(--white); }
+
+    /* ── CULTURE SECTION ── */
+    .culture-section { padding: 6rem 0; background: var(--white); }
+    .culture-card {
+      background: var(--green-pale); border-radius: 20px;
+      padding: 2rem; border: 1px solid rgba(46,125,82,.1);
+      text-align: center; transition: all .3s; height: 100%;
+    }
+    .culture-card:hover { background: var(--white); box-shadow: 0 16px 40px rgba(26,61,43,.08); transform: translateY(-4px); border-color: var(--green-bright); }
+    .culture-icon { font-size: 2.2rem; margin-bottom: 1rem; display: block; }
+    .culture-card h6 { font-family: 'DM Sans', sans-serif; font-weight: 700; font-size: 1rem; margin-bottom: .5rem; }
+    .culture-card p { font-size: .85rem; color: #4a6357; line-height: 1.65; margin: 0; }
+
+    /* ── JOIN US CTA ── */
+    .join-section {
+      background: linear-gradient(135deg, var(--green-deep), #254d38);
+      padding: 6rem 0; text-align: center; position: relative; overflow: hidden;
+    }
+    .join-section::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 50% 0%, rgba(200,168,75,.12), transparent 60%);
+    }
+    .join-section h2 { color: var(--white); font-size: clamp(2rem, 4vw, 3rem); }
+    .join-section p { color: var(--green-light); font-size: 1rem; max-width: 520px; margin: 1.2rem auto 2rem; line-height: 1.75; }
+    .btn-join {
+      display: inline-block; background: var(--gold); color: var(--green-deep);
+      border-radius: 30px; padding: .85rem 2.4rem;
+      font-weight: 700; font-size: .95rem;
+      text-decoration: none; transition: all .3s; margin: .4rem;
+    }
+    .btn-join:hover { background: var(--green-bright); color: var(--white); transform: translateY(-2px); }
+    .btn-join-outline {
+      display: inline-block; background: transparent; color: var(--white);
+      border: 2px solid rgba(255,255,255,.3); border-radius: 30px; padding: .85rem 2.4rem;
+      font-weight: 600; font-size: .95rem;
+      text-decoration: none; transition: all .3s; margin: .4rem;
+    }
+    .btn-join-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--text-dark); padding: 4rem 0 1.5rem; }
+    .footer-brand { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--white); }
+    .footer-brand span { color: var(--gold); }
+    .footer-tagline { color: var(--green-light); font-size: .85rem; margin-top: .4rem; }
+    footer h6 { color: var(--white); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; margin-bottom: 1.2rem; }
+    .footer-link { display: block; color: #7a9e8a; font-size: .88rem; text-decoration: none; margin-bottom: .5rem; transition: color .2s; }
+    .footer-link:hover { color: var(--gold); }
+    .footer-divider { border-color: rgba(255,255,255,.08); margin: 2.5rem 0 1.5rem; }
+    .footer-bottom { color: #4a6357; font-size: .8rem; }
+    .social-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px; background: rgba(255,255,255,.07);
+      border-radius: 50%; color: var(--green-light); font-size: 1rem;
+      text-decoration: none; transition: all .25s; margin-right: .4rem;
+    }
+    .social-btn:hover { background: var(--green-bright); color: var(--white); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal { opacity: 0; transform: translateY(30px); transition: all .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* dept tab hidden panels */
+    .dept-panel { display: none; }
+    .dept-panel.active { display: block; }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ NAVBAR ══════════ -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">🌿 Eco <span>Healing</span> Accessories</a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <i class="bi bi-list text-white fs-4"></i>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+      <ul class="navbar-nav align-items-center gap-2 mt-3 mt-lg-0">
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#products">Products</a></li>
+        <li class="nav-item"><a class="nav-link" href="#">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link active" href="team.html">Team</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#why">Why Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+        <li class="nav-item ms-2"><a class="nav-link nav-cta" href="index.html#contact">Get a Quote</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════ PAGE HERO ══════════ -->
+<section class="page-hero">
+  <div class="container position-relative z-1">
+    <div class="breadcrumb-nav">
+      <a href="index.html">Home</a>
+      <i class="bi bi-chevron-right"></i>
+      <a href="about.html">About</a>
+      <i class="bi bi-chevron-right"></i>
+      <span>Our Team</span>
+    </div>
+    <h1>Meet the <span>People</span><br>Behind Eco Healing</h1>
+    <p class="page-hero-sub">A passionate, dedicated team of sustainability champions and manufacturing experts — working together to deliver world-class eco accessories to global fashion brands.</p>
+    <div class="hero-stat-row">
+      <div class="hero-stat">
+        <div class="num">30+</div>
+        <div class="label">Team Members</div>
+      </div>
+      <div class="hero-stat-divider d-none d-sm-block"></div>
+      <div class="hero-stat">
+        <div class="num">5</div>
+        <div class="label">Departments</div>
+      </div>
+      <div class="hero-stat-divider d-none d-sm-block"></div>
+      <div class="hero-stat">
+        <div class="num">10+</div>
+        <div class="label">Years Combined Expertise</div>
+      </div>
+      <div class="hero-stat-divider d-none d-sm-block"></div>
+      <div class="hero-stat">
+        <div class="num">100%</div>
+        <div class="label">Eco Passionate</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ LEADERSHIP ══════════ -->
+<section class="leadership-section">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <div class="section-label mx-auto">Leadership</div>
+      <h2 class="mt-2">Guided by Vision,<br>Driven by Purpose</h2>
+      <p class="text-muted mt-2" style="max-width:500px;margin:auto;font-size:.95rem;">Our founders and directors bring decades of experience in sustainable manufacturing and global trade.</p>
+    </div>
+
+    <div class="row g-4 align-items-stretch">
+      <!-- Chairman — Featured -->
+      <div class="col-lg-4 reveal">
+        <div class="chairman-wrap h-100">
+          <div class="chairman-inner">
+            <img src="https://ecohealingbd.com/wp-content/uploads/2022/08/379-3795866_rana-aboamra-logo-png-download-rana-logo-transparent-1.png"
+                 alt="Chairman" class="chairman-img" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22160%22 height=%22160%22><rect width=%22160%22 height=%22160%22 rx=%2280%22 fill=%22%232e7d52%22/><text x=%2280%22 y=%22100%22 font-size=%2264%22 text-anchor=%22middle%22 fill=%22%23fff%22>👤</text></svg>'">
+            <div class="text-center">
+              <span class="chairman-badge">Founder & Chairman</span>
+              <h3>Md. Rahamot Ali Rana</h3>
+              <div class="chairman-title">Chairman, Eco Healing Accessories</div>
+            </div>
+            <p>Visionary founder and driving force behind Eco Healing Accessories. With over a decade of experience in sustainable garment accessories, Rana has built the company from the ground up with an unwavering commitment to eco-first manufacturing.</p>
+            <blockquote>
+              "Our goal was never just to manufacture — it was to prove that business and environmental responsibility can grow together."
+            </blockquote>
+            <div class="chairman-social">
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+              <a href="#"><i class="bi bi-facebook"></i></a>
+              <a href="#"><i class="bi bi-envelope"></i></a>
+              <a href="#"><i class="bi bi-whatsapp"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- MD -->
+      <div class="col-lg-4 reveal">
+        <div class="leader-card h-100">
+          <div class="leader-img-wrap">
+            <img src="https://ecohealingbd.com/wp-content/uploads/2022/06/WhatsApp-Image-2022-06-11-at-7.51.46-PM.jpeg"
+                 alt="MD" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22><rect width=%22150%22 height=%22150%22 rx=%2275%22 fill=%22%232e7d52%22/><text x=%2275%22 y=%22100%22 font-size=%2260%22 text-anchor=%22middle%22 fill=%22%23fff%22>👤</text></svg>'">
+          </div>
+          <div class="leader-body">
+            <h4>MD. Saidus Saklain</h4>
+            <span class="leader-role">Managing Director</span>
+            <p>Overseeing day-to-day operations and client relationships with a relentless focus on quality, timely delivery, and sustainable excellence. Saklain ensures every project reflects the Eco Healing standard.</p>
+            <div class="leader-social">
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+              <a href="#"><i class="bi bi-envelope"></i></a>
+              <a href="#"><i class="bi bi-whatsapp"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sales Manager 1 -->
+      <div class="col-lg-4 reveal">
+        <div class="leader-card h-100">
+          <div class="leader-img-wrap">
+            <img src="https://ecohealingbd.com/wp-content/uploads/2022/06/WhatsApp-Image-2022-06-29-at-3.28.22-PM.jpeg"
+                 alt="Sales Manager" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22><rect width=%22150%22 height=%22150%22 rx=%2275%22 fill=%22%232e7d52%22/><text x=%2275%22 y=%22100%22 font-size=%2260%22 text-anchor=%22middle%22 fill=%22%23fff%22>👤</text></svg>'">
+          </div>
+          <div class="leader-body">
+            <h4>MD. Anssr Ali</h4>
+            <span class="leader-role">Manager, Sales & Marketing</span>
+            <p>Building and nurturing global partnerships across European, US, and Asian markets. Anssr's deep knowledge of international fashion supply chains makes him a trusted bridge between clients and production.</p>
+            <div class="leader-social">
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+              <a href="#"><i class="bi bi-envelope"></i></a>
+              <a href="#"><i class="bi bi-whatsapp"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Sales Manager 2 -->
+      <div class="col-lg-4 offset-lg-4 reveal">
+        <div class="leader-card h-100">
+          <div class="leader-img-wrap">
+            <img src="https://ecohealingbd.com/wp-content/uploads/2025/03/Screenshot-2025-03-15-095917.png"
+                 alt="Sales Manager" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22150%22 height=%22150%22><rect width=%22150%22 height=%22150%22 rx=%2275%22 fill=%22%232e7d52%22/><text x=%2275%22 y=%22100%22 font-size=%2260%22 text-anchor=%22middle%22 fill=%22%23fff%22>👤</text></svg>'">
+          </div>
+          <div class="leader-body">
+            <h4>Rakibul Hasan</h4>
+            <span class="leader-role">Manager, Sales & Marketing</span>
+            <p>Driving business development with a hands-on, client-first approach. Rakibul ensures every inquiry gets a prompt, personalised response — turning enquiries into long-term partnerships.</p>
+            <div class="leader-social">
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+              <a href="#"><i class="bi bi-envelope"></i></a>
+              <a href="#"><i class="bi bi-whatsapp"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ DEPARTMENT TABS ══════════ -->
+<section class="dept-section">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <div class="section-label mx-auto">Our Departments</div>
+      <h2 class="mt-2">Expert Teams Across<br>Every Function</h2>
+      <p class="text-muted mt-2" style="max-width:500px;margin:auto;font-size:.95rem;">Explore the specialists behind production, quality, design, and more.</p>
+    </div>
+
+    <!-- Tab Buttons -->
+    <div class="dept-tabs reveal">
+      <button class="dept-tab active" data-tab="all">
+        <i class="bi bi-grid-3x3-gap"></i> All <span class="dept-count">8</span>
+      </button>
+      <button class="dept-tab" data-tab="production">
+        <i class="bi bi-gear"></i> Production <span class="dept-count">2</span>
+      </button>
+      <button class="dept-tab" data-tab="qc">
+        <i class="bi bi-shield-check"></i> Quality Control <span class="dept-count">2</span>
+      </button>
+      <button class="dept-tab" data-tab="design">
+        <i class="bi bi-palette"></i> Design <span class="dept-count">2</span>
+      </button>
+      <button class="dept-tab" data-tab="logistics">
+        <i class="bi bi-truck"></i> Logistics <span class="dept-count">2</span>
+      </button>
+    </div>
+
+    <!-- Staff Grid -->
+    <div class="row g-4" id="staffGrid">
+
+      <!-- Production -->
+      <div class="col-sm-6 col-lg-3 reveal staff-item" data-dept="production">
+        <div class="staff-card">
+          <div class="staff-img">
+            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><rect width='120' height='120' rx='60' fill='%232e7d52'/><text x='60' y='80' font-size='48' text-anchor='middle' fill='white'>👷</text></svg>" alt="">
+            <span class="dept-tag">Production</span>
+          </div>
+          <div class="staff-body">
+            <h6>Kamal Hossain</h6>
+            <span class="staff-role-badge">Production Manager</span>
+            <p>Coordinates the full manufacturing workflow ensuring eco-certified processes at every stage.</p>
+            <div class="staff-social">
+              <a href="#"><i class="bi bi-envelope"></i></a>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal staff-item" data-dept="production">
+        <div class="staff-card">
+          <div class="staff-img">
+            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><rect width='120' height='120' rx='60' fill='%232e7d52'/><text x='60' y='80' font-size='48' text-anchor='middle' fill='white'>🔧</text></svg>" alt="">
+            <span class="dept-tag">Production</span>
+          </div>
+          <div class="staff-body">
+            <h6>Farhan Mahmud</h6>
+            <span class="staff-role-badge">Sr. Production Officer</span>
+            <p>Oversees machine operations and monitors daily output targets across the factory floor.</p>
+            <div class="staff-social">
+              <a href="#"><i class="bi bi-envelope"></i></a>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- QC -->
+      <div class="col-sm-6 col-lg-3 reveal staff-item" data-dept="qc">
+        <div class="staff-card">
+          <div class="staff-img">
+            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><rect width='120' height='120' rx='60' fill='%231a3d2b'/><text x='60' y='80' font-size='48' text-anchor='middle' fill='white'>🔍</text></svg>" alt="">
+            <span class="dept-tag">QC</span>
+          </div>
+          <div class="staff-body">
+            <h6>Nasrin Akter</h6>
+            <span class="staff-role-badge">QC Manager</span>
+            <p>Leads multi-point inspection protocols to guarantee every product meets international standards.</p>
+            <div class="staff-social">
+              <a href="#"><i class="bi bi-envelope"></i></a>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal staff-item" data-dept="qc">
+        <div class="staff-card">
+          <div class="staff-img">
+            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><rect width='120' height='120' rx='60' fill='%231a3d2b'/><text x='60' y='80' font-size='48' text-anchor='middle' fill='white'>✅</text></svg>" alt="">
+            <span class="dept-tag">QC</span>
+          </div>
+          <div class="staff-body">
+            <h6>Jahidul Islam</h6>
+            <span class="staff-role-badge">QC Officer</span>
+            <p>Performs hands-on inspection of materials and finished accessories before shipment approval.</p>
+            <div class="staff-social">
+              <a href="#"><i class="bi bi-envelope"></i></a>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Design -->
+      <div class="col-sm-6 col-lg-3 reveal staff-item" data-dept="design">
+        <div class="staff-card">
+          <div class="staff-img">
+            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><rect width='120' height='120' rx='60' fill='%23c8a84b'/><text x='60' y='80' font-size='48' text-anchor='middle' fill='white'>🎨</text></svg>" alt="">
+            <span class="dept-tag">Design</span>
+          </div>
+          <div class="staff-body">
+            <h6>Sharmin Jahan</h6>
+            <span class="staff-role-badge">Head of Design</span>
+            <p>Creates bespoke accessory designs for global fashion brands using sustainable materials palettes.</p>
+            <div class="staff-social">
+              <a href="#"><i class="bi bi-envelope"></i></a>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal staff-item" data-dept="design">
+        <div class="staff-card">
+          <div class="staff-img">
+            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><rect width='120' height='120' rx='60' fill='%23c8a84b'/><text x='60' y='80' font-size='48' text-anchor='middle' fill='white'>✏️</text></svg>" alt="">
+            <span class="dept-tag">Design</span>
+          </div>
+          <div class="staff-body">
+            <h6>Tahmina Begum</h6>
+            <span class="staff-role-badge">Product Designer</span>
+            <p>Specialises in eco-label design, custom hang tags, and biodegradable packaging concepts.</p>
+            <div class="staff-social">
+              <a href="#"><i class="bi bi-envelope"></i></a>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Logistics -->
+      <div class="col-sm-6 col-lg-3 reveal staff-item" data-dept="logistics">
+        <div class="staff-card">
+          <div class="staff-img">
+            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><rect width='120' height='120' rx='60' fill='%232e7d52'/><text x='60' y='80' font-size='48' text-anchor='middle' fill='white'>🚚</text></svg>" alt="">
+            <span class="dept-tag">Logistics</span>
+          </div>
+          <div class="staff-body">
+            <h6>Mizanur Rahman</h6>
+            <span class="staff-role-badge">Logistics Manager</span>
+            <p>Manages export documentation, customs clearance, and on-time delivery to clients worldwide.</p>
+            <div class="staff-social">
+              <a href="#"><i class="bi bi-envelope"></i></a>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal staff-item" data-dept="logistics">
+        <div class="staff-card">
+          <div class="staff-img">
+            <img src="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' width='120' height='120'><rect width='120' height='120' rx='60' fill='%232e7d52'/><text x='60' y='80' font-size='48' text-anchor='middle' fill='white'>📦</text></svg>" alt="">
+            <span class="dept-tag">Logistics</span>
+          </div>
+          <div class="staff-body">
+            <h6>Ariful Haque</h6>
+            <span class="staff-role-badge">Logistics Officer</span>
+            <p>Coordinates shipment scheduling and ensures eco-certified packaging throughout the supply chain.</p>
+            <div class="staff-social">
+              <a href="#"><i class="bi bi-envelope"></i></a>
+              <a href="#"><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /row -->
+  </div>
+</section>
+
+<!-- ══════════ TEAM CULTURE ══════════ -->
+<section class="culture-section">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <div class="section-label mx-auto">Our Culture</div>
+      <h2 class="mt-2">What It's Like to Work<br>at Eco Healing</h2>
+      <p class="text-muted mt-2" style="max-width:500px;margin:auto;font-size:.95rem;">We believe a positive, purpose-driven team creates the best products — and the best outcomes for our planet.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="culture-card">
+          <span class="culture-icon">🌱</span>
+          <h6>Eco-First Mindset</h6>
+          <p>Every team member is trained in sustainable practices and takes personal ownership of our environmental mission.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="culture-card">
+          <span class="culture-icon">📚</span>
+          <h6>Continuous Learning</h6>
+          <p>Regular workshops, certifications, and industry training keep our team at the cutting edge of eco-manufacturing.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="culture-card">
+          <span class="culture-icon">🤝</span>
+          <h6>Collaboration</h6>
+          <p>Cross-department teamwork and open communication create better products and a stronger workplace culture.</p>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="culture-card">
+          <span class="culture-icon">🏅</span>
+          <h6>Recognition & Growth</h6>
+          <p>We celebrate achievements, reward initiative, and provide clear career development pathways for all staff.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ JOIN THE TEAM CTA ══════════ -->
+<section class="join-section">
+  <div class="container position-relative z-1">
+    <div class="reveal">
+      <span style="display:inline-block;background:rgba(200,168,75,.2);color:var(--gold);border:1px solid rgba(200,168,75,.4);font-size:.75rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;border-radius:20px;padding:.3rem 1.1rem;margin-bottom:1.5rem;">We're Hiring</span>
+      <h2>Want to Join Our<br><span style="color:var(--gold);">Green Team?</span></h2>
+      <p>We're always looking for passionate, talented people who share our commitment to sustainability and quality. Be part of something meaningful.</p>
+      <div>
+        <a href="index.html#contact" class="btn-join">View Open Positions</a>
+        <a href="index.html#contact" class="btn-join-outline">Send Your CV</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="footer-brand">🌿 Eco <span>Healing</span> Accessories</div>
+        <div class="footer-tagline">We Reuse. We Reduce. We Recycle.</div>
+        <p class="mt-3" style="color:#4a7060;font-size:.88rem;line-height:1.7">One of the largest & committed garments accessories manufacturing companies in Bangladesh — providing customer-friendly, sustainable accessories to the global fashion industry.</p>
+        <div class="mt-3">
+          <a href="#" class="social-btn"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="social-btn"><i class="bi bi-linkedin"></i></a>
+          <a href="#" class="social-btn"><i class="bi bi-whatsapp"></i></a>
+          <a href="#" class="social-btn"><i class="bi bi-envelope"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Company</h6>
+        <a href="about.html" class="footer-link">About Us</a>
+        <a href="team.html" class="footer-link">Our Team</a>
+        <a href="index.html#products" class="footer-link">Products</a>
+        <a href="index.html#contact" class="footer-link">Contact</a>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h6>Products</h6>
+        <a href="#" class="footer-link">Recycled Labels</a>
+        <a href="#" class="footer-link">Organic Hang Tags</a>
+        <a href="#" class="footer-link">Eco Packaging</a>
+        <a href="#" class="footer-link">Buttons & Trims</a>
+        <a href="#" class="footer-link">Sewing Thread</a>
+      </div>
+      <div class="col-lg-3">
+        <h6>Certifications</h6>
+        <a href="#" class="footer-link"><i class="bi bi-patch-check me-1"></i>GRS Certified</a>
+        <a href="#" class="footer-link"><i class="bi bi-patch-check me-1"></i>OEKO-TEX</a>
+        <a href="#" class="footer-link"><i class="bi bi-patch-check me-1"></i>GOTS</a>
+        <a href="#" class="footer-link"><i class="bi bi-patch-check me-1"></i>FSC</a>
+        <a href="#" class="footer-link"><i class="bi bi-patch-check me-1"></i>Bluesign</a>
+      </div>
+    </div>
+    <hr class="footer-divider"/>
+    <div class="d-flex flex-wrap justify-content-between align-items-center">
+      <div class="footer-bottom">© 2025 Eco Healing Accessories. All rights reserved. Made in Bangladesh 🇧🇩</div>
+      <div class="footer-bottom mt-2 mt-md-0">Reuse · Reduce · Recycle</div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+<script>
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  // Smooth scroll
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const target = document.querySelector(a.getAttribute('href'));
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  // Department tab filter
+  const tabs = document.querySelectorAll('.dept-tab');
+  const items = document.querySelectorAll('.staff-item');
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      tabs.forEach(t => t.classList.remove('active'));
+      tab.classList.add('active');
+      const dept = tab.dataset.tab;
+      items.forEach(item => {
+        if (dept === 'all' || item.dataset.dept === dept) {
+          item.style.display = '';
+          // re-trigger reveal animation
+          item.classList.remove('visible');
+          setTimeout(() => item.classList.add('visible'), 50);
+        } else {
+          item.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>
+</body>
+</html>
