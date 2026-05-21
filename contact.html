@@ -1,0 +1,1068 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Contact Us – Eco Healing Accessories</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --green-deep:   #1a3d2b;
+      --green-mid:    #2e7d52;
+      --green-bright: #3cb371;
+      --green-light:  #a8d5b5;
+      --green-pale:   #e8f5ee;
+      --gold:         #c8a84b;
+      --white:        #f9fdf9;
+      --text-dark:    #0d1f17;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+    h1,h2,h3,h4 { font-family: 'Playfair Display', serif; }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      background: var(--green-deep);
+      padding: 1rem 2rem;
+      position: sticky; top: 0; z-index: 1000;
+      border-bottom: 2px solid var(--gold);
+    }
+    .navbar-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; color: var(--white) !important; letter-spacing: .03em;
+    }
+    .navbar-brand span { color: var(--gold); }
+    .nav-link {
+      color: var(--green-light) !important; font-weight: 500;
+      font-size: .9rem; letter-spacing: .04em; text-transform: uppercase; transition: color .25s;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--gold) !important; }
+    .nav-cta {
+      background: var(--gold); color: var(--green-deep) !important;
+      border-radius: 30px; padding: .45rem 1.3rem !important; font-weight: 600;
+    }
+    .nav-cta:hover { background: var(--green-bright); color: var(--white) !important; }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: linear-gradient(135deg, var(--green-deep) 0%, #254d38 55%, #1e5c3c 100%);
+      padding: 7rem 0 5rem;
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232e7d52' fill-opacity='0.18'%3E%3Cpath d='M40 40c0-11 9-20 20-20s20 9 20 20-9 20-20 20-20-9-20-20zm-40 0c0-11 9-20 20-20S40 29 40 40 31 60 20 60 0 51 0 40z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: .35;
+    }
+    .page-hero::after {
+      content: '✉️';
+      position: absolute; font-size: 24rem;
+      right: -2rem; bottom: -4rem;
+      opacity: .05; pointer-events: none;
+    }
+    .breadcrumb-nav {
+      display: flex; align-items: center; gap: .5rem;
+      margin-bottom: 1.5rem; animation: fadeDown .7s ease both;
+    }
+    .breadcrumb-nav a { color: var(--green-light); font-size: .85rem; text-decoration: none; transition: color .2s; }
+    .breadcrumb-nav a:hover { color: var(--gold); }
+    .breadcrumb-nav span { color: var(--gold); font-size: .85rem; }
+    .breadcrumb-nav i { color: var(--green-light); font-size: .7rem; }
+    .page-hero h1 {
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      color: var(--white); line-height: 1.15;
+      animation: fadeDown .85s .1s ease both;
+    }
+    .page-hero h1 span { color: var(--gold); }
+    .page-hero-sub {
+      color: var(--green-light); font-size: 1.05rem; font-weight: 300;
+      max-width: 560px; line-height: 1.75; margin-top: 1.2rem;
+      animation: fadeDown 1s .2s ease both;
+    }
+    .hero-quick-links {
+      display: flex; flex-wrap: wrap; gap: 1rem;
+      margin-top: 2.5rem; animation: fadeDown 1s .35s ease both;
+    }
+    .hero-quick-link {
+      display: flex; align-items: center; gap: .6rem;
+      background: rgba(255,255,255,.08); border: 1px solid rgba(255,255,255,.15);
+      border-radius: 30px; padding: .55rem 1.2rem;
+      color: var(--white); text-decoration: none; font-size: .88rem; font-weight: 500;
+      transition: all .25s;
+    }
+    .hero-quick-link:hover { background: var(--gold); color: var(--green-deep); border-color: var(--gold); }
+    .hero-quick-link i { font-size: 1rem; color: var(--gold); transition: color .25s; }
+    .hero-quick-link:hover i { color: var(--green-deep); }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      display: inline-block; color: var(--green-mid); font-size: .78rem;
+      font-weight: 700; text-transform: uppercase; letter-spacing: .14em;
+      border-left: 3px solid var(--green-bright); padding-left: .7rem; margin-bottom: 1rem;
+    }
+
+    /* ── MAIN CONTACT SECTION ── */
+    .contact-section { padding: 6rem 0; background: var(--white); }
+
+    /* ── CONTACT INFO CARDS ── */
+    .info-card {
+      background: var(--green-pale);
+      border-radius: 20px; padding: 1.8rem;
+      border: 1px solid rgba(46,125,82,.12);
+      transition: all .3s; height: 100%;
+      position: relative; overflow: hidden;
+    }
+    .info-card::before {
+      content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+      background: linear-gradient(90deg, var(--green-bright), var(--gold));
+      transform: scaleX(0); transform-origin: left;
+      transition: transform .35s;
+    }
+    .info-card:hover { background: var(--white); box-shadow: 0 16px 40px rgba(26,61,43,.09); transform: translateY(-4px); border-color: var(--green-bright); }
+    .info-card:hover::before { transform: scaleX(1); }
+    .info-icon {
+      width: 52px; height: 52px; border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.4rem; margin-bottom: 1.1rem;
+      background: var(--white); border: 1px solid rgba(46,125,82,.15);
+    }
+    .info-card h6 { font-family: 'DM Sans',sans-serif; font-weight: 700; font-size: .88rem; text-transform: uppercase; letter-spacing: .08em; color: var(--green-mid); margin-bottom: .5rem; }
+    .info-card p { font-size: .9rem; color: var(--text-dark); font-weight: 500; line-height: 1.6; margin: 0; }
+    .info-card small { color: #4a6357; font-size: .78rem; }
+    .info-card a { color: var(--text-dark); text-decoration: none; transition: color .2s; }
+    .info-card a:hover { color: var(--green-mid); }
+
+    /* ── CONTACT FORM ── */
+    .form-wrap {
+      background: var(--white);
+      border-radius: 28px; padding: 3rem;
+      border: 1px solid rgba(46,125,82,.12);
+      box-shadow: 0 20px 60px rgba(26,61,43,.07);
+    }
+    .form-wrap h3 { font-size: 1.7rem; margin-bottom: .4rem; }
+    .form-wrap .form-sub { color: #4a6357; font-size: .9rem; margin-bottom: 2rem; line-height: 1.6; }
+
+    .form-group { margin-bottom: 1.3rem; }
+    .form-label {
+      display: block; font-size: .82rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .08em;
+      color: var(--green-deep); margin-bottom: .5rem;
+    }
+    .form-label span { color: #e05a5a; margin-left: 2px; }
+    .form-control, .form-select {
+      width: 100%; padding: .85rem 1.1rem;
+      background: var(--white); color: var(--text-dark);
+      border: 2px solid rgba(46,125,82,.18);
+      border-radius: 12px; font-family: 'DM Sans', sans-serif;
+      font-size: .9rem; transition: border-color .25s, box-shadow .25s;
+      outline: none; appearance: none;
+    }
+    .form-control:focus, .form-select:focus {
+      border-color: var(--green-mid);
+      box-shadow: 0 0 0 4px rgba(46,125,82,.1);
+    }
+    .form-control::placeholder { color: #9ab8a5; }
+    textarea.form-control { resize: vertical; min-height: 130px; }
+
+    .inquiry-type-grid {
+      display: grid; grid-template-columns: repeat(2, 1fr); gap: .6rem;
+    }
+    @media (max-width: 480px) { .inquiry-type-grid { grid-template-columns: 1fr; } }
+    .inquiry-chip {
+      display: flex; align-items: center; gap: .6rem;
+      padding: .7rem 1rem; border-radius: 10px;
+      border: 2px solid rgba(46,125,82,.18); background: var(--white);
+      cursor: pointer; font-size: .83rem; font-weight: 500; color: var(--text-dark);
+      transition: all .2s; user-select: none;
+    }
+    .inquiry-chip:hover { border-color: var(--green-mid); background: var(--green-pale); }
+    .inquiry-chip.selected { border-color: var(--green-mid); background: var(--green-pale); color: var(--green-deep); font-weight: 700; }
+    .inquiry-chip .chip-icon { font-size: 1.1rem; }
+    .inquiry-chip input { display: none; }
+
+    .btn-submit {
+      width: 100%; padding: 1rem;
+      background: var(--green-deep); color: var(--white);
+      border: none; border-radius: 12px;
+      font-family: 'DM Sans', sans-serif; font-size: 1rem; font-weight: 700;
+      cursor: pointer; transition: all .3s;
+      display: flex; align-items: center; justify-content: center; gap: .7rem;
+      letter-spacing: .03em;
+    }
+    .btn-submit:hover { background: var(--green-mid); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(26,61,43,.2); }
+    .btn-submit:active { transform: translateY(0); }
+
+    .form-note { font-size: .78rem; color: #4a6357; text-align: center; margin-top: 1rem; line-height: 1.6; }
+
+    /* Success message */
+    .success-msg {
+      display: none; text-align: center; padding: 2rem;
+      background: var(--green-pale); border-radius: 16px;
+      border: 2px solid var(--green-bright); margin-top: 1.5rem;
+    }
+    .success-msg .check { font-size: 2.5rem; margin-bottom: .8rem; display: block; }
+    .success-msg h5 { color: var(--green-deep); margin-bottom: .4rem; }
+    .success-msg p { font-size: .88rem; color: #4a6357; margin: 0; }
+
+    /* ── CONTACT SIDEBAR ── */
+    .sidebar-card {
+      background: var(--green-deep);
+      border-radius: 24px; padding: 2.2rem;
+      border: 2px solid rgba(200,168,75,.25);
+      position: relative; overflow: hidden;
+    }
+    .sidebar-card::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 30% 20%, rgba(200,168,75,.1), transparent 55%);
+    }
+    .sidebar-card h5 {
+      color: var(--white); font-family: 'DM Sans',sans-serif;
+      font-weight: 700; font-size: 1.1rem; margin-bottom: 1.4rem;
+      position: relative;
+    }
+    .sidebar-person {
+      display: flex; align-items: center; gap: 1rem;
+      padding: 1rem; border-radius: 14px;
+      background: rgba(255,255,255,.07); border: 1px solid rgba(255,255,255,.1);
+      margin-bottom: .8rem; transition: background .25s; cursor: default;
+      position: relative;
+    }
+    .sidebar-person:hover { background: rgba(255,255,255,.12); }
+    .sidebar-person-img {
+      width: 48px; height: 48px; border-radius: 50%;
+      object-fit: cover; object-position: top;
+      border: 2px solid rgba(200,168,75,.4); flex-shrink: 0;
+    }
+    .sidebar-person-info { flex: 1; min-width: 0; }
+    .sidebar-person-name { color: var(--white); font-weight: 700; font-size: .88rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .sidebar-person-role { color: var(--green-light); font-size: .72rem; text-transform: uppercase; letter-spacing: .06em; }
+    .sidebar-person-actions { display: flex; gap: .4rem; }
+    .sidebar-person-actions a {
+      width: 30px; height: 30px; border-radius: 50%;
+      background: rgba(255,255,255,.1); color: var(--green-light);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .85rem; text-decoration: none; transition: all .2s;
+    }
+    .sidebar-person-actions a:hover { background: var(--gold); color: var(--green-deep); }
+
+    .sidebar-divider { border-color: rgba(255,255,255,.1); margin: 1.3rem 0; }
+
+    .sidebar-hours { position: relative; }
+    .sidebar-hours h5 { color: var(--gold); font-size: .88rem; margin-bottom: .8rem; }
+    .hours-row {
+      display: flex; justify-content: space-between;
+      font-size: .82rem; margin-bottom: .4rem;
+    }
+    .hours-row .day { color: var(--green-light); }
+    .hours-row .time { color: var(--white); font-weight: 600; }
+    .hours-row.today .day { color: var(--gold); font-weight: 700; }
+    .hours-row.today .time { color: var(--gold); }
+    .open-badge {
+      display: inline-flex; align-items: center; gap: .4rem;
+      background: rgba(60,179,113,.2); color: #3cb371;
+      border: 1px solid rgba(60,179,113,.35); border-radius: 20px;
+      padding: .25rem .85rem; font-size: .72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: .08em; margin-bottom: 1rem;
+    }
+    .open-badge .dot { width: 7px; height: 7px; background: #3cb371; border-radius: 50%; animation: blink 1.5s infinite; }
+    @keyframes blink { 0%,100% { opacity:1; } 50% { opacity:.3; } }
+
+    .whatsapp-btn {
+      display: flex; align-items: center; justify-content: center; gap: .7rem;
+      background: #25d366; color: var(--white);
+      border-radius: 12px; padding: .85rem 1.5rem;
+      font-weight: 700; font-size: .9rem; text-decoration: none;
+      margin-top: 1.3rem; transition: all .3s;
+    }
+    .whatsapp-btn:hover { background: #1da851; color: var(--white); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(37,211,102,.3); }
+
+    /* ── MAP SECTION ── */
+    .map-section { padding: 6rem 0; background: var(--green-pale); }
+    .map-wrap {
+      border-radius: 24px; overflow: hidden;
+      border: 3px solid rgba(46,125,82,.15);
+      box-shadow: 0 20px 60px rgba(26,61,43,.08);
+      height: 420px; position: relative;
+    }
+    .map-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
+    .map-placeholder {
+      width: 100%; height: 100%;
+      background: linear-gradient(145deg, #1a3d2b, #254d38);
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      gap: 1rem;
+    }
+    .map-placeholder .map-icon { font-size: 4rem; }
+    .map-placeholder h5 { color: var(--white); font-family: 'DM Sans',sans-serif; font-weight: 700; }
+    .map-placeholder p { color: var(--green-light); font-size: .9rem; text-align: center; max-width: 300px; }
+    .map-placeholder a {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--gold); color: var(--green-deep);
+      border-radius: 30px; padding: .6rem 1.6rem;
+      font-weight: 700; font-size: .88rem; text-decoration: none;
+      transition: all .3s;
+    }
+    .map-placeholder a:hover { background: var(--green-bright); color: var(--white); }
+
+    .address-cards { margin-top: 2rem; }
+    .address-card {
+      background: var(--white); border-radius: 18px; padding: 1.5rem;
+      border: 1px solid rgba(46,125,82,.12); height: 100%;
+      transition: all .3s;
+    }
+    .address-card:hover { transform: translateY(-4px); box-shadow: 0 14px 36px rgba(26,61,43,.09); border-color: var(--green-bright); }
+    .address-card .addr-icon { font-size: 1.8rem; margin-bottom: .8rem; display: block; }
+    .address-card h6 { font-family: 'DM Sans',sans-serif; font-weight: 700; font-size: .95rem; margin-bottom: .4rem; color: var(--green-deep); }
+    .address-card p { font-size: .85rem; color: #4a6357; line-height: 1.7; margin: 0; }
+    .address-card .dir-link {
+      display: inline-flex; align-items: center; gap: .4rem;
+      color: var(--green-mid); font-size: .8rem; font-weight: 700;
+      text-decoration: none; margin-top: .7rem; transition: color .2s;
+    }
+    .address-card .dir-link:hover { color: var(--gold); }
+
+    /* ── FAQ SECTION ── */
+    .faq-section { padding: 6rem 0; background: var(--white); }
+    .faq-item {
+      border: 1px solid rgba(46,125,82,.12);
+      border-radius: 16px; margin-bottom: .8rem; overflow: hidden;
+      transition: border-color .25s;
+    }
+    .faq-item:hover { border-color: var(--green-bright); }
+    .faq-question {
+      width: 100%; background: none; border: none;
+      padding: 1.3rem 1.5rem;
+      display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+      cursor: pointer; text-align: left;
+      font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: .93rem;
+      color: var(--text-dark); transition: background .2s;
+    }
+    .faq-question:hover { background: var(--green-pale); }
+    .faq-question .faq-icon {
+      width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+      background: var(--green-pale); color: var(--green-mid);
+      display: flex; align-items: center; justify-content: center;
+      font-size: .85rem; transition: all .3s;
+    }
+    .faq-item.open .faq-question { background: var(--green-pale); color: var(--green-deep); }
+    .faq-item.open .faq-icon { background: var(--green-mid); color: var(--white); transform: rotate(45deg); }
+    .faq-answer {
+      max-height: 0; overflow: hidden;
+      transition: max-height .4s cubic-bezier(.4,0,.2,1), padding .3s;
+      padding: 0 1.5rem;
+    }
+    .faq-item.open .faq-answer { max-height: 300px; padding: 0 1.5rem 1.3rem; }
+    .faq-answer p { font-size: .88rem; color: #4a6357; line-height: 1.75; margin: 0; }
+
+    /* ── SOCIAL STRIP ── */
+    .social-section {
+      background: var(--green-deep); padding: 4rem 0; text-align: center;
+    }
+    .social-section h3 { color: var(--white); margin-bottom: .6rem; }
+    .social-section p { color: var(--green-light); font-size: .95rem; margin-bottom: 2rem; }
+    .social-big-btn {
+      display: inline-flex; align-items: center; gap: .75rem;
+      padding: .85rem 2rem; border-radius: 12px;
+      font-weight: 700; font-size: .95rem; text-decoration: none;
+      transition: all .3s; margin: .4rem;
+    }
+    .social-big-btn i { font-size: 1.2rem; }
+    .sb-fb   { background: #1877f2; color: var(--white); }
+    .sb-fb:hover   { background: #1464d0; transform: translateY(-2px); }
+    .sb-li   { background: #0a66c2; color: var(--white); }
+    .sb-li:hover   { background: #0850a0; transform: translateY(-2px); }
+    .sb-wa   { background: #25d366; color: var(--white); }
+    .sb-wa:hover   { background: #1da851; transform: translateY(-2px); }
+    .sb-em   { background: var(--gold); color: var(--green-deep); }
+    .sb-em:hover   { background: #b8942f; color: var(--green-deep); transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--text-dark); padding: 4rem 0 1.5rem; }
+    .footer-brand { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--white); }
+    .footer-brand span { color: var(--gold); }
+    .footer-tagline { color: var(--green-light); font-size: .85rem; margin-top: .4rem; }
+    footer h6 { color: var(--white); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; margin-bottom: 1.2rem; }
+    .footer-link { display: block; color: #7a9e8a; font-size: .88rem; text-decoration: none; margin-bottom: .5rem; transition: color .2s; }
+    .footer-link:hover { color: var(--gold); }
+    .footer-divider { border-color: rgba(255,255,255,.08); margin: 2.5rem 0 1.5rem; }
+    .footer-bottom { color: #4a6357; font-size: .8rem; }
+    .social-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px; background: rgba(255,255,255,.07);
+      border-radius: 50%; color: var(--green-light); font-size: 1rem;
+      text-decoration: none; transition: all .25s; margin-right: .4rem;
+    }
+    .social-btn:hover { background: var(--green-bright); color: var(--white); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal { opacity: 0; transform: translateY(30px); transition: all .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── FLOATING WHATSAPP ── */
+    .float-wa {
+      position: fixed; bottom: 2rem; right: 2rem; z-index: 999;
+      width: 58px; height: 58px; border-radius: 50%;
+      background: #25d366; color: var(--white);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem; text-decoration: none;
+      box-shadow: 0 6px 24px rgba(37,211,102,.45);
+      transition: all .3s; animation: floatPulse 2.5s infinite;
+    }
+    .float-wa:hover { background: #1da851; color: var(--white); transform: scale(1.1); animation: none; }
+    @keyframes floatPulse {
+      0%,100% { box-shadow: 0 6px 24px rgba(37,211,102,.45); }
+      50%      { box-shadow: 0 6px 40px rgba(37,211,102,.7); }
+    }
+    .float-wa-label {
+      position: fixed; bottom: 2.9rem; right: 5rem; z-index: 999;
+      background: var(--green-deep); color: var(--white);
+      font-size: .78rem; font-weight: 600; padding: .35rem .9rem;
+      border-radius: 20px; white-space: nowrap; opacity: 0;
+      transform: translateX(8px); transition: all .3s;
+      pointer-events: none;
+    }
+    .float-wa:hover ~ .float-wa-label,
+    .float-wa-wrap:hover .float-wa-label { opacity: 1; transform: translateX(0); }
+    .float-wa-wrap { position: fixed; bottom: 2rem; right: 2rem; z-index: 999; }
+
+    @media (max-width: 767px) {
+      .form-wrap { padding: 1.8rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ NAVBAR ══════════ -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">🌿 Eco <span>Healing</span> Accessories</a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <i class="bi bi-list text-white fs-4"></i>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+      <ul class="navbar-nav align-items-center gap-2 mt-3 mt-lg-0">
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#products">Products</a></li>
+        <li class="nav-item"><a class="nav-link" href="gallery.html">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="team.html">Team</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#why">Why Us</a></li>
+        <li class="nav-item"><a class="nav-link active" href="contact.html">Contact</a></li>
+        <li class="nav-item ms-2"><a class="nav-link nav-cta" href="#contactForm">Get a Quote</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════ PAGE HERO ══════════ -->
+<section class="page-hero">
+  <div class="container position-relative z-1">
+    <div class="breadcrumb-nav">
+      <a href="index.html">Home</a>
+      <i class="bi bi-chevron-right"></i>
+      <span>Contact Us</span>
+    </div>
+    <h1>Let's Start a <span>Conversation</span></h1>
+    <p class="page-hero-sub">Whether you need a quote, samples, or just want to learn more about our eco-certified accessories — our team is ready to help you find the right solution for your brand.</p>
+    <div class="hero-quick-links">
+      <a href="mailto:info@ecohealingbd.com" class="hero-quick-link">
+        <i class="bi bi-envelope-fill"></i> info@ecohealingbd.com
+      </a>
+      <a href="tel:+8801XXXXXXXXX" class="hero-quick-link">
+        <i class="bi bi-telephone-fill"></i> +880 1XXX-XXXXXX
+      </a>
+      <a href="https://wa.me/880XXXXXXXXXX" class="hero-quick-link" target="_blank">
+        <i class="bi bi-whatsapp"></i> WhatsApp Us
+      </a>
+      <a href="#map" class="hero-quick-link">
+        <i class="bi bi-geo-alt-fill"></i> Dhaka, Bangladesh
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CONTACT INFO CARDS ══════════ -->
+<section style="background:var(--green-pale);padding:3rem 0;">
+  <div class="container">
+    <div class="row g-3">
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="info-card">
+          <div class="info-icon">📧</div>
+          <h6>Email</h6>
+          <p><a href="mailto:info@ecohealingbd.com">info@ecohealingbd.com</a></p>
+          <small>We reply within 24 hours</small>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="info-card">
+          <div class="info-icon">📞</div>
+          <h6>Phone</h6>
+          <p><a href="tel:+8801XXXXXXXXX">+880 1XXX-XXXXXX</a></p>
+          <small>Sun–Thu, 9 AM – 6 PM (BST)</small>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="info-card">
+          <div class="info-icon">💬</div>
+          <h6>WhatsApp</h6>
+          <p><a href="https://wa.me/880XXXXXXXXXX" target="_blank">+880 1XXX-XXXXXX</a></p>
+          <small>Fast replies — usually within an hour</small>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="info-card">
+          <div class="info-icon">📍</div>
+          <h6>Head Office</h6>
+          <p>Dhaka, Bangladesh</p>
+          <small>Factory visits by appointment</small>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ MAIN CONTACT: FORM + SIDEBAR ══════════ -->
+<section class="contact-section" id="contactForm">
+  <div class="container">
+    <div class="row g-5 align-items-start">
+
+      <!-- FORM -->
+      <div class="col-lg-7 reveal">
+        <div class="form-wrap">
+          <div class="section-label">Send a Message</div>
+          <h3>Get in <span style="color:var(--green-mid);">Touch</span></h3>
+          <p class="form-sub">Fill in the details below and one of our team members will get back to you within 24 hours.</p>
+
+          <form id="contactForm" novalidate>
+
+            <!-- Inquiry type -->
+            <div class="form-group">
+              <label class="form-label">Inquiry Type <span>*</span></label>
+              <div class="inquiry-type-grid">
+                <label class="inquiry-chip selected">
+                  <input type="radio" name="inquiry" value="quote" checked>
+                  <span class="chip-icon">💰</span> Request a Quote
+                </label>
+                <label class="inquiry-chip">
+                  <input type="radio" name="inquiry" value="sample">
+                  <span class="chip-icon">📦</span> Request Samples
+                </label>
+                <label class="inquiry-chip">
+                  <input type="radio" name="inquiry" value="product">
+                  <span class="chip-icon">🏷️</span> Product Information
+                </label>
+                <label class="inquiry-chip">
+                  <input type="radio" name="inquiry" value="other">
+                  <span class="chip-icon">💬</span> General Inquiry
+                </label>
+              </div>
+            </div>
+
+            <!-- Name + Company -->
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="form-label">Your Name <span>*</span></label>
+                  <input type="text" class="form-control" placeholder="John Smith" required>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="form-label">Company Name</label>
+                  <input type="text" class="form-control" placeholder="Your Brand Ltd.">
+                </div>
+              </div>
+            </div>
+
+            <!-- Email + Phone -->
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="form-label">Email Address <span>*</span></label>
+                  <input type="email" class="form-control" placeholder="you@company.com" required>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="form-label">Phone / WhatsApp</label>
+                  <input type="tel" class="form-control" placeholder="+1 234 567 8900">
+                </div>
+              </div>
+            </div>
+
+            <!-- Country + Product Interest -->
+            <div class="row g-3">
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="form-label">Country</label>
+                  <select class="form-select">
+                    <option value="" disabled selected>Select your country</option>
+                    <option>United Kingdom</option>
+                    <option>United States</option>
+                    <option>Germany</option>
+                    <option>France</option>
+                    <option>Italy</option>
+                    <option>Spain</option>
+                    <option>Netherlands</option>
+                    <option>Sweden</option>
+                    <option>Denmark</option>
+                    <option>Japan</option>
+                    <option>South Korea</option>
+                    <option>Australia</option>
+                    <option>Canada</option>
+                    <option>Bangladesh</option>
+                    <option>Other</option>
+                  </select>
+                </div>
+              </div>
+              <div class="col-sm-6">
+                <div class="form-group">
+                  <label class="form-label">Product Interest</label>
+                  <select class="form-select">
+                    <option value="" disabled selected>Choose product category</option>
+                    <option>Labels & Hang Tags</option>
+                    <option>Buttons & Trims</option>
+                    <option>Eco Packaging</option>
+                    <option>Sewing Thread</option>
+                    <option>Zippers & Elastics</option>
+                    <option>Multiple Products</option>
+                    <option>Custom / Not Sure</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <!-- Message -->
+            <div class="form-group">
+              <label class="form-label">Your Message <span>*</span></label>
+              <textarea class="form-control" placeholder="Tell us about your requirements — quantity, certifications needed, deadline, or any other details..." required></textarea>
+            </div>
+
+            <!-- Certifications needed -->
+            <div class="form-group">
+              <label class="form-label">Certifications Required</label>
+              <div style="display:flex;flex-wrap:wrap;gap:.5rem;">
+                <label style="display:flex;align-items:center;gap:.4rem;font-size:.83rem;cursor:pointer;padding:.4rem .9rem;border:2px solid rgba(46,125,82,.18);border-radius:20px;transition:all .2s;" class="cert-check">
+                  <input type="checkbox" style="accent-color:var(--green-mid);"> ♻️ GRS
+                </label>
+                <label style="display:flex;align-items:center;gap:.4rem;font-size:.83rem;cursor:pointer;padding:.4rem .9rem;border:2px solid rgba(46,125,82,.18);border-radius:20px;transition:all .2s;" class="cert-check">
+                  <input type="checkbox" style="accent-color:var(--green-mid);"> 🌾 GOTS
+                </label>
+                <label style="display:flex;align-items:center;gap:.4rem;font-size:.83rem;cursor:pointer;padding:.4rem .9rem;border:2px solid rgba(46,125,82,.18);border-radius:20px;transition:all .2s;" class="cert-check">
+                  <input type="checkbox" style="accent-color:var(--green-mid);"> 🛡️ OEKO-TEX
+                </label>
+                <label style="display:flex;align-items:center;gap:.4rem;font-size:.83rem;cursor:pointer;padding:.4rem .9rem;border:2px solid rgba(46,125,82,.18);border-radius:20px;transition:all .2s;" class="cert-check">
+                  <input type="checkbox" style="accent-color:var(--green-mid);"> 🌲 FSC
+                </label>
+                <label style="display:flex;align-items:center;gap:.4rem;font-size:.83rem;cursor:pointer;padding:.4rem .9rem;border:2px solid rgba(46,125,82,.18);border-radius:20px;transition:all .2s;" class="cert-check">
+                  <input type="checkbox" style="accent-color:var(--green-mid);"> 💧 Bluesign
+                </label>
+                <label style="display:flex;align-items:center;gap:.4rem;font-size:.83rem;cursor:pointer;padding:.4rem .9rem;border:2px solid rgba(46,125,82,.18);border-radius:20px;transition:all .2s;" class="cert-check">
+                  <input type="checkbox" style="accent-color:var(--green-mid);"> ✅ ISO 9001
+                </label>
+              </div>
+            </div>
+
+            <button type="submit" class="btn-submit">
+              <i class="bi bi-send-fill"></i> Send Message
+            </button>
+            <p class="form-note">🔒 Your information is private and will never be shared. We'll respond within 24 hours (business days).</p>
+          </form>
+
+          <div class="success-msg" id="successMsg">
+            <span class="check">✅</span>
+            <h5>Message Sent Successfully!</h5>
+            <p>Thank you for reaching out. One of our team members will get back to you within 24 hours. In the meantime, feel free to browse our <a href="gallery.html" style="color:var(--green-mid);">product gallery</a>.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- SIDEBAR -->
+      <div class="col-lg-5 reveal">
+        <div class="sidebar-card">
+
+          <!-- Team contacts -->
+          <h5>🤝 Talk to Our Sales Team</h5>
+
+          <div class="sidebar-person">
+            <img src="https://ecohealingbd.com/wp-content/uploads/2022/06/WhatsApp-Image-2022-06-11-at-7.51.46-PM.jpeg"
+                 alt="MD" class="sidebar-person-img"
+                 onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2248%22 height=%2248%22><rect width=%2248%22 height=%2248%22 rx=%2224%22 fill=%22%232e7d52%22/><text x=%2224%22 y=%2232%22 font-size=%2222%22 text-anchor=%22middle%22 fill=%22white%22>👤</text></svg>'">
+            <div class="sidebar-person-info">
+              <div class="sidebar-person-name">MD. Saidus Saklain</div>
+              <div class="sidebar-person-role">Managing Director</div>
+            </div>
+            <div class="sidebar-person-actions">
+              <a href="mailto:md@ecohealingbd.com" title="Email"><i class="bi bi-envelope"></i></a>
+              <a href="https://wa.me/880XXXXXXXXXX" title="WhatsApp" target="_blank"><i class="bi bi-whatsapp"></i></a>
+            </div>
+          </div>
+
+          <div class="sidebar-person">
+            <img src="https://ecohealingbd.com/wp-content/uploads/2022/06/WhatsApp-Image-2022-06-29-at-3.28.22-PM.jpeg"
+                 alt="Anssr Ali" class="sidebar-person-img"
+                 onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2248%22 height=%2248%22><rect width=%2248%22 height=%2248%22 rx=%2224%22 fill=%22%232e7d52%22/><text x=%2224%22 y=%2232%22 font-size=%2222%22 text-anchor=%22middle%22 fill=%22white%22>👤</text></svg>'">
+            <div class="sidebar-person-info">
+              <div class="sidebar-person-name">MD. Anssr Ali</div>
+              <div class="sidebar-person-role">Sales & Marketing Manager</div>
+            </div>
+            <div class="sidebar-person-actions">
+              <a href="mailto:sales@ecohealingbd.com" title="Email"><i class="bi bi-envelope"></i></a>
+              <a href="https://wa.me/880XXXXXXXXXX" title="WhatsApp" target="_blank"><i class="bi bi-whatsapp"></i></a>
+            </div>
+          </div>
+
+          <div class="sidebar-person">
+            <img src="https://ecohealingbd.com/wp-content/uploads/2025/03/Screenshot-2025-03-15-095917.png"
+                 alt="Rakibul" class="sidebar-person-img"
+                 onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%2248%22 height=%2248%22><rect width=%2248%22 height=%2248%22 rx=%2224%22 fill=%22%232e7d52%22/><text x=%2224%22 y=%2232%22 font-size=%2222%22 text-anchor=%22middle%22 fill=%22white%22>👤</text></svg>'">
+            <div class="sidebar-person-info">
+              <div class="sidebar-person-name">Rakibul Hasan</div>
+              <div class="sidebar-person-role">Sales & Marketing Manager</div>
+            </div>
+            <div class="sidebar-person-actions">
+              <a href="mailto:rakibul@ecohealingbd.com" title="Email"><i class="bi bi-envelope"></i></a>
+              <a href="https://wa.me/880XXXXXXXXXX" title="WhatsApp" target="_blank"><i class="bi bi-whatsapp"></i></a>
+            </div>
+          </div>
+
+          <hr class="sidebar-divider"/>
+
+          <!-- Office hours -->
+          <div class="sidebar-hours">
+            <div class="open-badge"><span class="dot"></span> Currently Open</div>
+            <h5>🕘 Office Hours</h5>
+            <div class="hours-row today">
+              <span class="day">Sunday – Thursday</span>
+              <span class="time">9:00 AM – 6:00 PM</span>
+            </div>
+            <div class="hours-row">
+              <span class="day">Friday</span>
+              <span class="time">Closed</span>
+            </div>
+            <div class="hours-row">
+              <span class="day">Saturday</span>
+              <span class="time">10:00 AM – 2:00 PM</span>
+            </div>
+            <p style="color:var(--green-light);font-size:.78rem;margin-top:.6rem;">All times in Bangladesh Standard Time (BST / UTC+6)</p>
+          </div>
+
+          <a href="https://wa.me/880XXXXXXXXXX" class="whatsapp-btn" target="_blank">
+            <i class="bi bi-whatsapp" style="font-size:1.3rem;"></i>
+            Chat on WhatsApp Now
+          </a>
+        </div>
+
+        <!-- Response time promise -->
+        <div style="margin-top:1.5rem;background:var(--green-pale);border-radius:18px;padding:1.5rem;border:1px solid rgba(46,125,82,.12);">
+          <div style="display:flex;align-items:flex-start;gap:1rem;">
+            <span style="font-size:2rem;flex-shrink:0;">⚡</span>
+            <div>
+              <div style="font-weight:700;font-size:.95rem;color:var(--green-deep);margin-bottom:.3rem;">Fast Response Guarantee</div>
+              <p style="font-size:.83rem;color:#4a6357;line-height:1.65;margin:0;">We respond to all inquiries within <strong>24 hours</strong> on business days. For urgent orders, WhatsApp us for same-day response.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Certifications mini -->
+        <div style="margin-top:1rem;background:var(--white);border-radius:18px;padding:1.5rem;border:1px solid rgba(46,125,82,.12);">
+          <div style="font-weight:700;font-size:.88rem;color:var(--green-deep);margin-bottom:.9rem;text-transform:uppercase;letter-spacing:.07em;">🏅 Our Certifications</div>
+          <div style="display:flex;flex-wrap:wrap;gap:.4rem;">
+            <span style="background:var(--green-pale);color:var(--green-mid);border-radius:20px;padding:.25rem .75rem;font-size:.72rem;font-weight:700;">♻️ GRS</span>
+            <span style="background:var(--green-pale);color:var(--green-mid);border-radius:20px;padding:.25rem .75rem;font-size:.72rem;font-weight:700;">🌾 GOTS</span>
+            <span style="background:var(--green-pale);color:var(--green-mid);border-radius:20px;padding:.25rem .75rem;font-size:.72rem;font-weight:700;">🛡️ OEKO-TEX</span>
+            <span style="background:var(--green-pale);color:var(--green-mid);border-radius:20px;padding:.25rem .75rem;font-size:.72rem;font-weight:700;">🌲 FSC</span>
+            <span style="background:var(--green-pale);color:var(--green-mid);border-radius:20px;padding:.25rem .75rem;font-size:.72rem;font-weight:700;">💧 Bluesign</span>
+            <span style="background:var(--green-pale);color:var(--green-mid);border-radius:20px;padding:.25rem .75rem;font-size:.72rem;font-weight:700;">✅ ISO 9001</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ MAP + ADDRESSES ══════════ -->
+<section class="map-section" id="map">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <div class="section-label mx-auto">Find Us</div>
+      <h2 class="mt-2">Our Location</h2>
+      <p class="text-muted mt-2" style="max-width:500px;margin:auto;font-size:.95rem;">Visit our head office and production facility in Dhaka, Bangladesh. Factory tours available by appointment.</p>
+    </div>
+
+    <!-- Map embed placeholder -->
+    <div class="map-wrap reveal">
+      <div class="map-placeholder">
+        <div class="map-icon">📍</div>
+        <h5>Eco Healing Accessories</h5>
+        <p>Dhaka, Bangladesh<br>Replace this with your Google Maps embed iframe</p>
+        <a href="https://maps.google.com" target="_blank"><i class="bi bi-map"></i> Open in Google Maps</a>
+      </div>
+      <!-- To embed a real map, replace the div above with:
+      <iframe src="https://www.google.com/maps/embed?pb=YOUR_EMBED_URL" allowfullscreen loading="lazy"></iframe>
+      -->
+    </div>
+
+    <div class="row g-4 address-cards mt-1">
+      <div class="col-sm-6 col-lg-4 reveal">
+        <div class="address-card">
+          <span class="addr-icon">🏢</span>
+          <h6>Head Office</h6>
+          <p>Dhaka, Bangladesh<br>
+          (Full address available on request)</p>
+          <a href="https://maps.google.com" target="_blank" class="dir-link">
+            <i class="bi bi-arrow-right-circle-fill"></i> Get Directions
+          </a>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4 reveal">
+        <div class="address-card">
+          <span class="addr-icon">🏭</span>
+          <h6>Production Facility</h6>
+          <p>Dhaka Industrial Zone<br>Bangladesh<br>
+          <em style="font-size:.78rem;color:#7a9e8a;">Factory visits by appointment only</em></p>
+          <a href="mailto:info@ecohealingbd.com" class="dir-link">
+            <i class="bi bi-calendar-check-fill"></i> Book a Visit
+          </a>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-4 reveal">
+        <div class="address-card">
+          <span class="addr-icon">✈️</span>
+          <h6>Export Worldwide</h6>
+          <p>We ship to Europe, USA, Asia &amp; beyond. Full export documentation &amp; customs support included.</p>
+          <a href="#contactForm" class="dir-link">
+            <i class="bi bi-send-fill"></i> Request Shipping Quote
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FAQ ══════════ -->
+<section class="faq-section">
+  <div class="container">
+    <div class="row g-5 align-items-start">
+      <div class="col-lg-4 reveal">
+        <div class="section-label">FAQ</div>
+        <h2 class="mt-2">Common<br>Questions</h2>
+        <p class="text-muted mt-3" style="font-size:.92rem;line-height:1.75;">Can't find your answer below? Send us a message and we'll get back to you within 24 hours.</p>
+        <a href="#contactForm" style="display:inline-flex;align-items:center;gap:.5rem;background:var(--green-deep);color:var(--white);border-radius:30px;padding:.7rem 1.6rem;font-weight:700;font-size:.88rem;text-decoration:none;margin-top:1rem;transition:all .3s;" onmouseover="this.style.background='var(--green-mid)'" onmouseout="this.style.background='var(--green-deep)'">
+          <i class="bi bi-chat-dots-fill"></i> Ask a Question
+        </a>
+      </div>
+      <div class="col-lg-8 reveal">
+        <div class="faq-item open">
+          <button class="faq-question">
+            What is the minimum order quantity (MOQ)?
+            <span class="faq-icon"><i class="bi bi-plus-lg"></i></span>
+          </button>
+          <div class="faq-answer">
+            <p>Our MOQ varies by product. For most labels and hang tags, the MOQ is 1,000 pieces per design. For buttons and trims, it starts at 500 pieces. For eco packaging, MOQ is typically 500 units. We can discuss lower quantities for sample or trial orders — just get in touch and we'll find a solution that works for you.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            How long does production and delivery take?
+            <span class="faq-icon"><i class="bi bi-plus-lg"></i></span>
+          </button>
+          <div class="faq-answer">
+            <p>Standard production lead time is 15–25 working days after sample approval and payment confirmation. Delivery time depends on destination — typically 7–14 days for Europe/USA via air freight, or 25–35 days via sea freight. Rush orders can be arranged — contact us to discuss your deadline.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            Do you provide product samples before placing a bulk order?
+            <span class="faq-icon"><i class="bi bi-plus-lg"></i></span>
+          </button>
+          <div class="faq-answer">
+            <p>Yes, we always recommend requesting samples before bulk production. Development samples are available for a nominal charge (refunded on bulk orders above a certain value). Physical samples can be shipped worldwide. Simply fill in the contact form and select "Request Samples."</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            Which certifications do your products carry?
+            <span class="faq-icon"><i class="bi bi-plus-lg"></i></span>
+          </button>
+          <div class="faq-answer">
+            <p>We hold GRS (Global Recycled Standard), GOTS, OEKO-TEX Standard 100, FSC, Bluesign, and ISO 9001 certifications. Most of our products can be supplied with the relevant certification documentation your buyers or auditors require. Let us know which certifications are critical for your brand and we'll ensure compliance.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            Can you create fully custom designs and private labels?
+            <span class="faq-icon"><i class="bi bi-plus-lg"></i></span>
+          </button>
+          <div class="faq-answer">
+            <p>Absolutely. Custom design is one of our core strengths. We work with your artwork, brand guidelines, and specific material requirements to create accessories that are uniquely yours. Our in-house design team can also create concepts from scratch if needed — just share your brand brief.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            What payment methods and terms do you accept?
+            <span class="faq-icon"><i class="bi bi-plus-lg"></i></span>
+          </button>
+          <div class="faq-answer">
+            <p>We accept bank transfer (TT), Letter of Credit (LC), and other trade finance instruments for larger orders. Typical payment terms are 30–50% advance with balance before shipment or against documents. For long-term clients, we can discuss more flexible terms. Please contact us to discuss your specific needs.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ SOCIAL STRIP ══════════ -->
+<section class="social-section">
+  <div class="container reveal">
+    <h3>Connect With Us</h3>
+    <p>Follow us for the latest products, certifications updates, and sustainability news.</p>
+    <div>
+      <a href="#" class="social-big-btn sb-fb"><i class="bi bi-facebook"></i> Facebook</a>
+      <a href="#" class="social-big-btn sb-li"><i class="bi bi-linkedin"></i> LinkedIn</a>
+      <a href="https://wa.me/880XXXXXXXXXX" class="social-big-btn sb-wa" target="_blank"><i class="bi bi-whatsapp"></i> WhatsApp</a>
+      <a href="mailto:info@ecohealingbd.com" class="social-big-btn sb-em"><i class="bi bi-envelope-fill"></i> Email</a>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="footer-brand">🌿 Eco <span>Healing</span> Accessories</div>
+        <div class="footer-tagline">We Reuse. We Reduce. We Recycle.</div>
+        <p class="mt-3" style="color:#4a7060;font-size:.88rem;line-height:1.7">One of the largest & committed garments accessories manufacturing companies in Bangladesh — providing customer-friendly, sustainable accessories to the global fashion industry.</p>
+        <div class="mt-3">
+          <a href="#" class="social-btn"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="social-btn"><i class="bi bi-linkedin"></i></a>
+          <a href="#" class="social-btn"><i class="bi bi-whatsapp"></i></a>
+          <a href="#" class="social-btn"><i class="bi bi-envelope"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Company</h6>
+        <a href="about.html" class="footer-link">About Us</a>
+        <a href="team.html" class="footer-link">Our Team</a>
+        <a href="gallery.html" class="footer-link">Gallery</a>
+        <a href="contact.html" class="footer-link">Contact</a>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h6>Products</h6>
+        <a href="#" class="footer-link">Recycled Labels</a>
+        <a href="#" class="footer-link">Organic Hang Tags</a>
+        <a href="#" class="footer-link">Eco Packaging</a>
+        <a href="#" class="footer-link">Buttons & Trims</a>
+        <a href="#" class="footer-link">Sewing Thread</a>
+      </div>
+      <div class="col-lg-3">
+        <h6>Certifications</h6>
+        <a href="#" class="footer-link"><i class="bi bi-patch-check me-1"></i>GRS Certified</a>
+        <a href="#" class="footer-link"><i class="bi bi-patch-check me-1"></i>OEKO-TEX</a>
+        <a href="#" class="footer-link"><i class="bi bi-patch-check me-1"></i>GOTS</a>
+        <a href="#" class="footer-link"><i class="bi bi-patch-check me-1"></i>FSC</a>
+        <a href="#" class="footer-link"><i class="bi bi-patch-check me-1"></i>Bluesign</a>
+      </div>
+    </div>
+    <hr class="footer-divider"/>
+    <div class="d-flex flex-wrap justify-content-between align-items-center">
+      <div class="footer-bottom">© 2025 Eco Healing Accessories. All rights reserved. Made in Bangladesh 🇧🇩</div>
+      <div class="footer-bottom mt-2 mt-md-0">Reuse · Reduce · Recycle</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════ FLOATING WHATSAPP ══════════ -->
+<div class="float-wa-wrap">
+  <a href="https://wa.me/880XXXXXXXXXX" class="float-wa" target="_blank" title="Chat on WhatsApp">
+    <i class="bi bi-whatsapp"></i>
+  </a>
+  <div class="float-wa-label">Chat with us!</div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+<script>
+  /* ── Scroll Reveal ── */
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+  /* ── Inquiry type chips ── */
+  document.querySelectorAll('.inquiry-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.inquiry-chip').forEach(c => c.classList.remove('selected'));
+      chip.classList.add('selected');
+    });
+  });
+
+  /* ── Cert checkboxes hover ── */
+  document.querySelectorAll('.cert-check').forEach(lbl => {
+    const cb = lbl.querySelector('input');
+    cb.addEventListener('change', () => {
+      lbl.style.borderColor = cb.checked ? 'var(--green-mid)' : 'rgba(46,125,82,.18)';
+      lbl.style.background  = cb.checked ? 'var(--green-pale)' : 'var(--white)';
+      lbl.style.fontWeight  = cb.checked ? '700' : '400';
+    });
+  });
+
+  /* ── Form submit ── */
+  document.getElementById('contactForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const btn = this.querySelector('.btn-submit');
+    btn.innerHTML = '<i class="bi bi-hourglass-split"></i> Sending…';
+    btn.style.opacity = '.7';
+    setTimeout(() => {
+      this.style.display = 'none';
+      document.getElementById('successMsg').style.display = 'block';
+    }, 1200);
+  });
+
+  /* ── FAQ accordion ── */
+  document.querySelectorAll('.faq-question').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const item = btn.closest('.faq-item');
+      const isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  /* ── Smooth scroll ── */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+
+  /* ── Highlight open hours based on current day/time ── */
+  const now = new Date();
+  const bst = new Date(now.toLocaleString('en-US', { timeZone: 'Asia/Dhaka' }));
+  const day = bst.getDay(); // 0=Sun, 6=Sat
+  const h   = bst.getHours();
+  const isOpen = (day >= 0 && day <= 4 && h >= 9 && h < 18) ||
+                 (day === 6 && h >= 10 && h < 14);
+  const badge = document.querySelector('.open-badge');
+  if (!isOpen) {
+    badge.style.background = 'rgba(200,60,60,.15)';
+    badge.style.color = '#e05a5a';
+    badge.style.borderColor = 'rgba(200,60,60,.3)';
+    badge.querySelector('.dot').style.background = '#e05a5a';
+    badge.lastChild.textContent = ' Currently Closed';
+  }
+</script>
+</body>
+</html>
