@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Gallery – Eco Healing Accessories</title>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --green-deep:   #1a3d2b;
+      --green-mid:    #2e7d52;
+      --green-bright: #3cb371;
+      --green-light:  #a8d5b5;
+      --green-pale:   #e8f5ee;
+      --gold:         #c8a84b;
+      --white:        #f9fdf9;
+      --text-dark:    #0d1f17;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--white);
+      color: var(--text-dark);
+      overflow-x: hidden;
+    }
+    h1,h2,h3,h4 { font-family: 'Playfair Display', serif; }
+
+    /* ── NAVBAR ── */
+    .navbar {
+      background: var(--green-deep);
+      padding: 1rem 2rem;
+      position: sticky; top: 0; z-index: 1000;
+      border-bottom: 2px solid var(--gold);
+    }
+    .navbar-brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem; color: var(--white) !important; letter-spacing: .03em;
+    }
+    .navbar-brand span { color: var(--gold); }
+    .nav-link {
+      color: var(--green-light) !important; font-weight: 500;
+      font-size: .9rem; letter-spacing: .04em; text-transform: uppercase; transition: color .25s;
+    }
+    .nav-link:hover, .nav-link.active { color: var(--gold) !important; }
+    .nav-cta {
+      background: var(--gold); color: var(--green-deep) !important;
+      border-radius: 30px; padding: .45rem 1.3rem !important; font-weight: 600;
+    }
+    .nav-cta:hover { background: var(--green-bright); color: var(--white) !important; }
+
+    /* ── PAGE HERO ── */
+    .page-hero {
+      background: linear-gradient(135deg, var(--green-deep) 0%, #254d38 55%, #1e5c3c 100%);
+      padding: 7rem 0 5rem;
+      position: relative; overflow: hidden;
+    }
+    .page-hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%232e7d52' fill-opacity='0.18'%3E%3Cpath d='M40 40c0-11 9-20 20-20s20 9 20 20-9 20-20 20-20-9-20-20zm-40 0c0-11 9-20 20-20S40 29 40 40 31 60 20 60 0 51 0 40z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: .35;
+    }
+    .page-hero::after {
+      content: '📷';
+      position: absolute; font-size: 24rem;
+      right: -2rem; bottom: -4rem;
+      opacity: .05; pointer-events: none;
+    }
+    .breadcrumb-nav {
+      display: flex; align-items: center; gap: .5rem;
+      margin-bottom: 1.5rem; animation: fadeDown .7s ease both;
+    }
+    .breadcrumb-nav a { color: var(--green-light); font-size: .85rem; text-decoration: none; transition: color .2s; }
+    .breadcrumb-nav a:hover { color: var(--gold); }
+    .breadcrumb-nav span { color: var(--gold); font-size: .85rem; }
+    .breadcrumb-nav i { color: var(--green-light); font-size: .7rem; }
+    .page-hero h1 {
+      font-size: clamp(2.4rem, 5vw, 4.2rem);
+      color: var(--white); line-height: 1.15;
+      animation: fadeDown .85s .1s ease both;
+    }
+    .page-hero h1 span { color: var(--gold); }
+    .page-hero-sub {
+      color: var(--green-light); font-size: 1.05rem; font-weight: 300;
+      max-width: 560px; line-height: 1.75; margin-top: 1.2rem;
+      animation: fadeDown 1s .2s ease both;
+    }
+    .hero-stat-row {
+      display: flex; flex-wrap: wrap; gap: 2.5rem;
+      margin-top: 3rem; animation: fadeDown 1s .35s ease both;
+    }
+    .hero-stat .num {
+      font-family: 'Playfair Display', serif; font-size: 2.4rem;
+      font-weight: 900; color: var(--gold); line-height: 1;
+    }
+    .hero-stat .label {
+      font-size: .8rem; color: var(--green-light);
+      text-transform: uppercase; letter-spacing: .08em; margin-top: .3rem;
+    }
+    .hero-stat-divider { width: 1px; background: rgba(255,255,255,.15); align-self: stretch; }
+
+    /* ── SECTION LABEL ── */
+    .section-label {
+      display: inline-block; color: var(--green-mid); font-size: .78rem;
+      font-weight: 700; text-transform: uppercase; letter-spacing: .14em;
+      border-left: 3px solid var(--green-bright); padding-left: .7rem; margin-bottom: 1rem;
+    }
+
+    /* ── FILTER TABS ── */
+    .gallery-section { padding: 5rem 0 6rem; background: var(--white); }
+    .filter-bar {
+      display: flex; flex-wrap: wrap; gap: .65rem;
+      justify-content: center; margin-bottom: 3rem;
+    }
+    .filter-btn {
+      background: var(--white); color: var(--green-mid);
+      border: 2px solid rgba(46,125,82,.2);
+      border-radius: 30px; padding: .5rem 1.4rem;
+      font-size: .83rem; font-weight: 600; cursor: pointer;
+      transition: all .25s; text-transform: uppercase; letter-spacing: .07em;
+      display: flex; align-items: center; gap: .5rem;
+    }
+    .filter-btn:hover, .filter-btn.active {
+      background: var(--green-deep); color: var(--white); border-color: var(--green-deep);
+    }
+    .filter-btn .count {
+      background: var(--green-pale); color: var(--green-mid);
+      border-radius: 30px; padding: .05rem .55rem;
+      font-size: .72rem; font-weight: 700;
+    }
+    .filter-btn.active .count { background: rgba(255,255,255,.2); color: var(--white); }
+
+    /* ── MASONRY GRID ── */
+    .gallery-grid {
+      columns: 4;
+      column-gap: 1rem;
+    }
+    @media (max-width: 1199px) { .gallery-grid { columns: 3; } }
+    @media (max-width: 767px)  { .gallery-grid { columns: 2; } }
+    @media (max-width: 479px)  { .gallery-grid { columns: 1; } }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 1rem;
+      position: relative;
+      border-radius: 16px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: transform .35s cubic-bezier(.17,.67,.3,1.1);
+    }
+    .gallery-item:hover { transform: scale(1.02); }
+    .gallery-item.hidden { display: none; }
+
+    .gallery-thumb {
+      display: block; width: 100%;
+      background-size: cover;
+      background-position: center;
+      border-radius: 16px;
+      position: relative;
+    }
+
+    /* Tall items */
+    .gallery-item.tall .gallery-thumb { padding-bottom: 140%; }
+    /* Wide items */
+    .gallery-item.wide .gallery-thumb { padding-bottom: 56%; }
+    /* Square items */
+    .gallery-item.square .gallery-thumb { padding-bottom: 100%; }
+    /* Short items */
+    .gallery-item.short .gallery-thumb { padding-bottom: 70%; }
+
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(26,61,43,.88) 0%, rgba(26,61,43,.1) 50%, transparent 100%);
+      opacity: 0;
+      transition: opacity .35s;
+      border-radius: 16px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 1.4rem;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .overlay-cat {
+      display: inline-block;
+      background: var(--gold); color: var(--green-deep);
+      font-size: .68rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .1em; border-radius: 20px; padding: .2rem .7rem;
+      margin-bottom: .5rem; align-self: flex-start;
+    }
+    .overlay-title {
+      color: var(--white); font-family: 'DM Sans', sans-serif;
+      font-weight: 700; font-size: .95rem; line-height: 1.4; margin-bottom: .4rem;
+    }
+    .overlay-sub {
+      color: var(--green-light); font-size: .78rem;
+    }
+    .overlay-zoom {
+      position: absolute; top: 1rem; right: 1rem;
+      width: 36px; height: 36px;
+      background: rgba(255,255,255,.15); backdrop-filter: blur(6px);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+      color: var(--white); font-size: 1rem;
+      opacity: 0; transform: scale(.7);
+      transition: all .3s .05s;
+    }
+    .gallery-item:hover .overlay-zoom { opacity: 1; transform: scale(1); }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      position: fixed; inset: 0; z-index: 9999;
+      background: rgba(10,25,17,.95);
+      display: flex; align-items: center; justify-content: center;
+      opacity: 0; pointer-events: none;
+      transition: opacity .3s;
+    }
+    .lightbox.open { opacity: 1; pointer-events: all; }
+    .lightbox-inner {
+      position: relative; max-width: 90vw; max-height: 90vh;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .lightbox-img-wrap {
+      background-size: cover; background-position: center;
+      border-radius: 16px;
+      max-width: 80vw; max-height: 78vh;
+      min-width: 320px; min-height: 260px;
+      width: 700px; height: 520px;
+      box-shadow: 0 40px 120px rgba(0,0,0,.6);
+      transition: background-image .2s;
+    }
+    .lightbox-info {
+      position: absolute; bottom: -4.5rem; left: 0; right: 0;
+      text-align: center;
+    }
+    .lightbox-title {
+      color: var(--white); font-family: 'DM Sans', sans-serif;
+      font-weight: 700; font-size: 1.05rem; margin-bottom: .25rem;
+    }
+    .lightbox-cat {
+      display: inline-block;
+      background: rgba(200,168,75,.25); color: var(--gold);
+      border: 1px solid rgba(200,168,75,.4);
+      font-size: .72rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .1em; border-radius: 20px; padding: .2rem .8rem;
+    }
+    .lightbox-close {
+      position: fixed; top: 1.5rem; right: 1.5rem;
+      width: 44px; height: 44px;
+      background: rgba(255,255,255,.1); border: none; border-radius: 50%;
+      color: var(--white); font-size: 1.2rem; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: background .2s;
+    }
+    .lightbox-close:hover { background: rgba(200,168,75,.3); }
+    .lightbox-nav {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 44px; height: 44px;
+      background: rgba(255,255,255,.1); border: 1px solid rgba(255,255,255,.15);
+      border-radius: 50%; color: var(--white); font-size: 1.1rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      transition: all .2s;
+    }
+    .lightbox-nav:hover { background: var(--gold); color: var(--green-deep); }
+    .lightbox-prev { left: -3.5rem; }
+    .lightbox-next { right: -3.5rem; }
+    .lightbox-counter {
+      position: fixed; top: 1.5rem; left: 50%; transform: translateX(-50%);
+      color: var(--green-light); font-size: .82rem; letter-spacing: .08em;
+    }
+
+    /* ── VIDEO SECTION ── */
+    .video-section { padding: 6rem 0; background: var(--green-pale); }
+    .video-card {
+      background: var(--white); border-radius: 20px; overflow: hidden;
+      border: 1px solid rgba(46,125,82,.12);
+      transition: transform .3s, box-shadow .3s; height: 100%;
+    }
+    .video-card:hover { transform: translateY(-6px); box-shadow: 0 20px 50px rgba(26,61,43,.1); }
+    .video-thumb {
+      position: relative; height: 200px;
+      background-size: cover; background-position: center;
+      cursor: pointer;
+    }
+    .video-play {
+      position: absolute; inset: 0;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(26,61,43,.45);
+    }
+    .video-play-btn {
+      width: 56px; height: 56px;
+      background: var(--gold); border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      color: var(--green-deep); font-size: 1.3rem;
+      transition: transform .3s, background .3s;
+    }
+    .video-card:hover .video-play-btn { transform: scale(1.1); background: var(--white); }
+    .video-body { padding: 1.3rem; }
+    .video-body h6 { font-family: 'DM Sans', sans-serif; font-weight: 700; margin-bottom: .3rem; }
+    .video-body p { font-size: .83rem; color: #4a6357; margin: 0; line-height: 1.6; }
+    .video-tag {
+      display: inline-block; background: var(--green-pale); color: var(--green-mid);
+      font-size: .68rem; font-weight: 700; text-transform: uppercase;
+      letter-spacing: .08em; border-radius: 12px; padding: .18rem .7rem; margin-bottom: .6rem;
+    }
+
+    /* ── CERTIFICATIONS STRIP ── */
+    .cert-strip {
+      background: var(--green-deep); padding: 3rem 0;
+      overflow: hidden; position: relative;
+    }
+    .cert-strip::before {
+      content: ''; position: absolute; inset: 0;
+      background: radial-gradient(ellipse at 20% 50%, rgba(60,179,113,.08), transparent 55%);
+    }
+    .cert-marquee {
+      display: flex; gap: 3rem; align-items: center;
+      animation: marquee 22s linear infinite;
+      width: max-content;
+    }
+    .cert-marquee:hover { animation-play-state: paused; }
+    @keyframes marquee {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+    .cert-chip {
+      display: flex; align-items: center; gap: .7rem;
+      background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.1);
+      border-radius: 30px; padding: .55rem 1.4rem; white-space: nowrap;
+    }
+    .cert-chip span { color: var(--green-light); font-size: .83rem; font-weight: 600; letter-spacing: .04em; }
+    .cert-chip .cert-ico { font-size: 1.2rem; }
+
+    /* ── CTA STRIP ── */
+    .cta-section {
+      background: var(--green-bright); padding: 5rem 0; text-align: center;
+    }
+    .cta-section h2 { color: var(--white); font-size: clamp(1.8rem, 4vw, 3rem); }
+    .cta-section p { color: rgba(255,255,255,.85); font-size: 1rem; max-width: 520px; margin: 1rem auto 2rem; }
+    .btn-cta-dark {
+      display: inline-block; background: var(--green-deep); color: var(--white);
+      border-radius: 30px; padding: .85rem 2.3rem;
+      font-weight: 700; font-size: .95rem; text-decoration: none; transition: all .3s; margin: .4rem;
+    }
+    .btn-cta-dark:hover { background: var(--gold); color: var(--green-deep); transform: translateY(-2px); }
+
+    /* ── FOOTER ── */
+    footer { background: var(--text-dark); padding: 4rem 0 1.5rem; }
+    .footer-brand { font-family: 'Playfair Display', serif; font-size: 1.5rem; color: var(--white); }
+    .footer-brand span { color: var(--gold); }
+    .footer-tagline { color: var(--green-light); font-size: .85rem; margin-top: .4rem; }
+    footer h6 { color: var(--white); font-weight: 700; text-transform: uppercase; letter-spacing: .08em; font-size: .8rem; margin-bottom: 1.2rem; }
+    .footer-link { display: block; color: #7a9e8a; font-size: .88rem; text-decoration: none; margin-bottom: .5rem; transition: color .2s; }
+    .footer-link:hover { color: var(--gold); }
+    .footer-divider { border-color: rgba(255,255,255,.08); margin: 2.5rem 0 1.5rem; }
+    .footer-bottom { color: #4a6357; font-size: .8rem; }
+    .social-btn {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 36px; height: 36px; background: rgba(255,255,255,.07);
+      border-radius: 50%; color: var(--green-light); font-size: 1rem;
+      text-decoration: none; transition: all .25s; margin-right: .4rem;
+    }
+    .social-btn:hover { background: var(--green-bright); color: var(--white); }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .reveal { opacity: 0; transform: translateY(30px); transition: all .7s ease; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* stagger reveals */
+    .gallery-item { opacity: 0; transform: translateY(20px); transition: opacity .5s, transform .5s; }
+    .gallery-item.in-view { opacity: 1; transform: translateY(0); }
+
+    /* No results */
+    #no-results { display: none; text-align: center; padding: 4rem 0; color: #4a6357; }
+    #no-results i { font-size: 3rem; margin-bottom: 1rem; display: block; color: var(--green-light); }
+  </style>
+</head>
+<body>
+
+<!-- ══════════ NAVBAR ══════════ -->
+<nav class="navbar navbar-expand-lg">
+  <div class="container">
+    <a class="navbar-brand" href="index.html">🌿 Eco <span>Healing</span> Accessories</a>
+    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <i class="bi bi-list text-white fs-4"></i>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+      <ul class="navbar-nav align-items-center gap-2 mt-3 mt-lg-0">
+        <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#products">Products</a></li>
+        <li class="nav-item"><a class="nav-link active" href="gallery.html">Gallery</a></li>
+        <li class="nav-item"><a class="nav-link" href="team.html">Team</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#why">Why Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="index.html#contact">Contact</a></li>
+        <li class="nav-item ms-2"><a class="nav-link nav-cta" href="index.html#contact">Get a Quote</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- ══════════ PAGE HERO ══════════ -->
+<section class="page-hero">
+  <div class="container position-relative z-1">
+    <div class="breadcrumb-nav">
+      <a href="index.html">Home</a>
+      <i class="bi bi-chevron-right"></i>
+      <span>Gallery</span>
+    </div>
+    <h1>Our Work in <span>Pictures</span></h1>
+    <p class="page-hero-sub">A visual showcase of our eco-certified accessories, production facilities, certifications, and the sustainable craftsmanship that defines Eco Healing Accessories.</p>
+    <div class="hero-stat-row">
+      <div class="hero-stat">
+        <div class="num">200+</div>
+        <div class="label">Product Photos</div>
+      </div>
+      <div class="hero-stat-divider d-none d-sm-block"></div>
+      <div class="hero-stat">
+        <div class="num">6</div>
+        <div class="label">Categories</div>
+      </div>
+      <div class="hero-stat-divider d-none d-sm-block"></div>
+      <div class="hero-stat">
+        <div class="num">50+</div>
+        <div class="label">Product Lines</div>
+      </div>
+      <div class="hero-stat-divider d-none d-sm-block"></div>
+      <div class="hero-stat">
+        <div class="num">100%</div>
+        <div class="label">Eco Certified</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ GALLERY ══════════ -->
+<section class="gallery-section">
+  <div class="container-fluid px-4">
+
+    <!-- Filter Bar -->
+    <div class="filter-bar reveal" id="filterBar">
+      <button class="filter-btn active" data-cat="all">
+        <i class="bi bi-grid-3x3-gap"></i> All <span class="count" id="cnt-all">24</span>
+      </button>
+      <button class="filter-btn" data-cat="labels">
+        <i class="bi bi-tag"></i> Labels & Tags <span class="count" id="cnt-labels">6</span>
+      </button>
+      <button class="filter-btn" data-cat="packaging">
+        <i class="bi bi-box-seam"></i> Packaging <span class="count" id="cnt-packaging">5</span>
+      </button>
+      <button class="filter-btn" data-cat="buttons">
+        <i class="bi bi-circle"></i> Buttons & Trims <span class="count" id="cnt-buttons">4</span>
+      </button>
+      <button class="filter-btn" data-cat="thread">
+        <i class="bi bi-arrow-repeat"></i> Thread & Fabric <span class="count" id="cnt-thread">4</span>
+      </button>
+      <button class="filter-btn" data-cat="facility">
+        <i class="bi bi-building"></i> Facility <span class="count" id="cnt-facility">3</span>
+      </button>
+      <button class="filter-btn" data-cat="certs">
+        <i class="bi bi-patch-check"></i> Certifications <span class="count" id="cnt-certs">2</span>
+      </button>
+    </div>
+
+    <!-- Masonry Grid -->
+    <div class="gallery-grid" id="galleryGrid">
+
+      <!-- LABELS & TAGS -->
+      <div class="gallery-item tall" data-cat="labels" data-title="Organic Cotton Woven Labels" data-catname="Labels & Tags">
+        <div class="gallery-thumb" style="background-color:#2e7d52;background-image:linear-gradient(145deg,#1a3d2b,#2e7d52,#3cb371);padding-bottom:140%;position:relative;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.8rem;">
+            <span style="font-size:4rem;">🏷️</span>
+            <div style="color:rgba(255,255,255,.6);font-size:.75rem;text-transform:uppercase;letter-spacing:.1em;">Organic Cotton</div>
+            <div style="color:var(--gold);font-family:'Playfair Display',serif;font-size:1.1rem;text-align:center;padding:0 1rem;">Woven Labels</div>
+            <div style="display:flex;gap:.3rem;margin-top:.5rem;">
+              <div style="width:32px;height:12px;background:#e8f5ee;border-radius:3px;"></div>
+              <div style="width:32px;height:12px;background:#a8d5b5;border-radius:3px;"></div>
+              <div style="width:32px;height:12px;background:#3cb371;border-radius:3px;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-overlay">
+          <span class="overlay-cat">Labels & Tags</span>
+          <div class="overlay-title">Organic Cotton Woven Labels</div>
+          <div class="overlay-sub">GRS Certified · Custom Sizes</div>
+        </div>
+        <div class="overlay-zoom"><i class="bi bi-zoom-in"></i></div>
+      </div>
+
+      <div class="gallery-item short" data-cat="labels" data-title="Recycled Polyester Hang Tags" data-catname="Labels & Tags">
+        <div class="gallery-thumb" style="background:linear-gradient(135deg,#254d38,#c8a84b33);padding-bottom:70%;position:relative;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;">
+            <span style="font-size:3rem;">🔖</span>
+            <div style="color:var(--gold);font-weight:700;font-size:.9rem;">Hang Tags</div>
+            <div style="color:rgba(255,255,255,.5);font-size:.72rem;">Recycled Polyester</div>
+          </div>
+        </div>
+        <div class="gallery-overlay">
+          <span class="overlay-cat">Labels & Tags</span>
+          <div class="overlay-title">Recycled Polyester Hang Tags</div>
+          <div class="overlay-sub">OEKO-TEX Certified</div>
+        </div>
+        <div class="overlay-zoom"><i class="bi bi-zoom-in"></i></div>
+      </div>
+
+      <div class="gallery-item square" data-cat="packaging" data-title="Biodegradable Kraft Boxes" data-catname="Packaging">
+        <div class="gallery-thumb" style="background:linear-gradient(145deg,#8B4513,#a0522d,#cd853f);padding-bottom:100%;position:relative;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.7rem;">
+            <span style="font-size:3.5rem;">📦</span>
+            <div style="color:rgba(255,255,255,.9);font-weight:700;font-size:.95rem;">Kraft Boxes</div>
+            <div style="color:rgba(255,255,255,.6);font-size:.72rem;">100% Biodegradable</div>
+            <div style="background:rgba(255,255,255,.15);border-radius:20px;padding:.2rem .8rem;color:rgba(255,255,255,.8);font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;">FSC Certified</div>
+          </div>
+        </div>
+        <div class="gallery-overlay">
+          <span class="overlay-cat">Packaging</span>
+          <div class="overlay-title">Biodegradable Kraft Boxes</div>
+          <div class="overlay-sub">FSC Certified · Custom Print</div>
+        </div>
+        <div class="overlay-zoom"><i class="bi bi-zoom-in"></i></div>
+      </div>
+
+      <div class="gallery-item tall" data-cat="buttons" data-title="Natural Corozo Buttons" data-catname="Buttons & Trims">
+        <div class="gallery-thumb" style="background:linear-gradient(145deg,#3d2b1a,#6b4c2a,#8b6914);padding-bottom:140%;position:relative;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.7rem;">
+            <span style="font-size:3.5rem;">🟤</span>
+            <div style="color:var(--gold);font-weight:700;font-size:.95rem;">Corozo Buttons</div>
+            <div style="color:rgba(255,255,255,.55);font-size:.72rem;">Natural Tagua Nut</div>
+            <div style="display:flex;gap:.5rem;margin-top:.5rem;">
+              <div style="width:18px;height:18px;border-radius:50%;background:#5c3d1e;border:2px solid rgba(255,255,255,.3);"></div>
+              <div style="width:18px;height:18px;border-radius:50%;background:#8b6914;border:2px solid rgba(255,255,255,.3);"></div>
+              <div style="width:18px;height:18px;border-radius:50%;background:#c4a35a;border:2px solid rgba(255,255,255,.3);"></div>
+              <div style="width:18px;height:18px;border-radius:50%;background:#f0d090;border:2px solid rgba(255,255,255,.3);"></div>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-overlay">
+          <span class="overlay-cat">Buttons & Trims</span>
+          <div class="overlay-title">Natural Corozo Buttons</div>
+          <div class="overlay-sub">Tagua Nut · Biodegradable</div>
+        </div>
+        <div class="overlay-zoom"><i class="bi bi-zoom-in"></i></div>
+      </div>
+
+      <div class="gallery-item short" data-cat="thread" data-title="Organic Sewing Thread" data-catname="Thread & Fabric">
+        <div class="gallery-thumb" style="background:linear-gradient(145deg,#1a3d2b,#2e7d52);padding-bottom:70%;position:relative;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;">
+            <span style="font-size:3rem;">🧵</span>
+            <div style="color:var(--green-light);font-weight:700;font-size:.9rem;">Organic Thread</div>
+            <div style="display:flex;gap:.3rem;margin-top:.3rem;">
+              <div style="width:8px;height:30px;background:#3cb371;border-radius:4px;"></div>
+              <div style="width:8px;height:30px;background:#c8a84b;border-radius:4px;"></div>
+              <div style="width:8px;height:30px;background:#f9fdf9;border-radius:4px;"></div>
+              <div style="width:8px;height:30px;background:#2e7d52;border-radius:4px;"></div>
+              <div style="width:8px;height:30px;background:#a8d5b5;border-radius:4px;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-overlay">
+          <span class="overlay-cat">Thread & Fabric</span>
+          <div class="overlay-title">Organic Sewing Thread</div>
+          <div class="overlay-sub">GOTS Certified · 200+ Colours</div>
+        </div>
+        <div class="overlay-zoom"><i class="bi bi-zoom-in"></i></div>
+      </div>
+
+      <div class="gallery-item square" data-cat="labels" data-title="Embossed Leather Patches" data-catname="Labels & Tags">
+        <div class="gallery-thumb" style="background:linear-gradient(145deg,#4a2c0a,#7a4520,#a0522d);padding-bottom:100%;position:relative;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;">
+            <span style="font-size:3rem;">🪧</span>
+            <div style="color:var(--gold);font-weight:700;font-size:.9rem;">Leather Patches</div>
+            <div style="color:rgba(255,255,255,.55);font-size:.72rem;">Vegan Leather</div>
+          </div>
+        </div>
+        <div class="gallery-overlay">
+          <span class="overlay-cat">Labels & Tags</span>
+          <div class="overlay-title">Embossed Leather Patches</div>
+          <div class="overlay-sub">Vegan Leather · Custom Deboss</div>
+        </div>
+        <div class="overlay-zoom"><i class="bi bi-zoom-in"></i></div>
+      </div>
+
+      <div class="gallery-item tall" data-cat="facility" data-title="Production Floor — Dhaka Factory" data-catname="Facility">
+        <div class="gallery-thumb" style="background:linear-gradient(145deg,#0d1f17,#1a3d2b,#254d38);padding-bottom:140%;position:relative;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.8rem;">
+            <span style="font-size:3.5rem;">🏭</span>
+            <div style="color:var(--white);font-weight:700;font-size:1rem;">Production Floor</div>
+            <div style="color:var(--green-light);font-size:.75rem;">Dhaka, Bangladesh</div>
+            <div style="margin-top:.5rem;display:grid;grid-template-columns:repeat(3,1fr);gap:4px;width:80px;">
+              <div style="height:20px;background:rgba(255,255,255,.08);border-radius:3px;"></div>
+              <div style="height:20px;background:rgba(255,255,255,.12);border-radius:3px;"></div>
+              <div style="height:20px;background:rgba(255,255,255,.06);border-radius:3px;"></div>
+              <div style="height:20px;background:rgba(255,255,255,.1);border-radius:3px;"></div>
+              <div style="height:20px;background:rgba(255,255,255,.15);border-radius:3px;"></div>
+              <div style="height:20px;background:rgba(255,255,255,.08);border-radius:3px;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-overlay">
+          <span class="overlay-cat">Facility</span>
+          <div class="overlay-title">Production Floor — Dhaka Factory</div>
+          <div class="overlay-sub">ISO 9001 Certified Facility</div>
+        </div>
+        <div class="overlay-zoom"><i class="bi bi-zoom-in"></i></div>
+      </div>
+
+      <div class="gallery-item short" data-cat="packaging" data-title="Recycled Poly Bags" data-catname="Packaging">
+        <div class="gallery-thumb" style="background:linear-gradient(145deg,#1a3d2b,#3cb37133);padding-bottom:70%;position:relative;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;">
+            <span style="font-size:2.8rem;">🛍️</span>
+            <div style="color:var(--green-light);font-weight:700;font-size:.88rem;">Recycled Poly Bags</div>
+            <div style="background:rgba(60,179,113,.2);border-radius:20px;padding:.2rem .7rem;color:#3cb371;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;">GRS Certified</div>
+          </div>
+        </div>
+        <div class="gallery-overlay">
+          <span class="overlay-cat">Packaging</span>
+          <div class="overlay-title">Recycled Poly Bags</div>
+          <div class="overlay-sub">GRS Certified · 100% Recycled</div>
+        </div>
+        <div class="overlay-zoom"><i class="bi bi-zoom-in"></i></div>
+      </div>
+
+      <div class="gallery-item square" data-cat="certs" data-title="GRS & GOTS Certifications" data-catname="Certifications">
+        <div class="gallery-thumb" style="background:linear-gradient(145deg,#1a3d2b,#254d38);padding-bottom:100%;position:relative;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.7rem;">
+            <span style="font-size:3rem;">🏅</span>
+            <div style="color:var(--gold);font-weight:700;font-size:.95rem;text-align:center;">GRS · GOTS<br>Certified</div>
+            <div style="display:flex;gap:.5rem;margin-top:.3rem;">
+              <div style="background:rgba(200,168,75,.2);border:1px solid rgba(200,168,75,.4);border-radius:12px;padding:.2rem .65rem;color:var(--gold);font-size:.65rem;font-weight:700;text-transform:uppercase;">GRS</div>
+              <div style="background:rgba(60,179,113,.2);border:1px solid rgba(60,179,113,.4);border-radius:12px;padding:.2rem .65rem;color:#3cb371;font-size:.65rem;font-weight:700;text-transform:uppercase;">GOTS</div>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-overlay">
+          <span class="overlay-cat">Certifications</span>
+          <div class="overlay-title">GRS & GOTS Certifications</div>
+          <div class="overlay-sub">Globally Recognised Standards</div>
+        </div>
+        <div class="overlay-zoom"><i class="bi bi-zoom-in"></i></div>
+      </div>
+
+      <div class="gallery-item tall" data-cat="thread" data-title="GOTS Certified Elastic Bands" data-catname="Thread & Fabric">
+        <div class="gallery-thumb" style="background:linear-gradient(145deg,#2e7d52,#1a3d2b);padding-bottom:140%;position:relative;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.7rem;">
+            <span style="font-size:3.5rem;">🔗</span>
+            <div style="color:var(--green-light);font-weight:700;font-size:.9rem;">Elastic Bands</div>
+            <div style="color:rgba(255,255,255,.5);font-size:.72rem;">GOTS Certified</div>
+            <div style="display:flex;flex-direction:column;gap:4px;margin-top:.5rem;width:70%;">
+              <div style="height:6px;background:linear-gradient(90deg,#3cb371,#a8d5b5);border-radius:3px;"></div>
+              <div style="height:6px;background:linear-gradient(90deg,#c8a84b,#f0d090);border-radius:3px;"></div>
+              <div style="height:6px;background:linear-gradient(90deg,#f9fdf9,#e8f5ee);border-radius:3px;"></div>
+              <div style="height:6px;background:linear-gradient(90deg,#1a3d2b,#2e7d52);border-radius:3px;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-overlay">
+          <span class="overlay-cat">Thread & Fabric</span>
+          <div class="overlay-title">GOTS Certified Elastic Bands</div>
+          <div class="overlay-sub">Organic Cotton · 50+ Widths</div>
+        </div>
+        <div class="overlay-zoom"><i class="bi bi-zoom-in"></i></div>
+      </div>
+
+      <div class="gallery-item short" data-cat="buttons" data-title="Recycled Ocean Plastic Buttons" data-catname="Buttons & Trims">
+        <div class="gallery-thumb" style="background:linear-gradient(145deg,#003366,#004080,#1a5276);padding-bottom:70%;position:relative;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;">
+            <span style="font-size:2.8rem;">🌊</span>
+            <div style="color:#7fc8f8;font-weight:700;font-size:.88rem;">Ocean Plastic Buttons</div>
+            <div style="background:rgba(127,200,248,.15);border-radius:20px;padding:.2rem .7rem;color:#7fc8f8;font-size:.68rem;text-transform:uppercase;letter-spacing:.08em;">GRS Certified</div>
+          </div>
+        </div>
+        <div class="gallery-overlay">
+          <span class="overlay-cat">Buttons & Trims</span>
+          <div class="overlay-title">Recycled Ocean Plastic Buttons</div>
+          <div class="overlay-sub">GRS Certified · Ocean Waste</div>
+        </div>
+        <div class="overlay-zoom"><i class="bi bi-zoom-in"></i></div>
+      </div>
+
+      <div class="gallery-item square" data-cat="packaging" data-title="Compostable Mailer Bags" data-catname="Packaging">
+        <div class="gallery-thumb" style="background:linear-gradient(145deg,#2d4a22,#3d6b2e,#4a8c38);padding-bottom:100%;position:relative;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.7rem;">
+            <span style="font-size:3rem;">🌿</span>
+            <div style="color:rgba(255,255,255,.9);font-weight:700;font-size:.9rem;">Compostable Mailers</div>
+            <div style="color:rgba(255,255,255,.6);font-size:.72rem;">PLA Based · 90 Day Compost</div>
+          </div>
+        </div>
+        <div class="gallery-overlay">
+          <span class="overlay-cat">Packaging</span>
+          <div class="overlay-title">Compostable Mailer Bags</div>
+          <div class="overlay-sub">PLA Based · Certified Compostable</div>
+        </div>
+        <div class="overlay-zoom"><i class="bi bi-zoom-in"></i></div>
+      </div>
+
+      <div class="gallery-item tall" data-cat="labels" data-title="Printed Satin Care Labels" data-catname="Labels & Tags">
+        <div class="gallery-thumb" style="background:linear-gradient(145deg,#4a1a4a,#6b2a6b,#8b4a8b);padding-bottom:140%;position:relative;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.7rem;">
+            <span style="font-size:3.5rem;">🏷️</span>
+            <div style="color:rgba(255,255,255,.9);font-weight:700;font-size:.9rem;">Satin Care Labels</div>
+            <div style="color:rgba(255,255,255,.55);font-size:.72rem;">Recycled Satin</div>
+            <div style="border:1px solid rgba(255,255,255,.2);border-radius:8px;padding:.5rem .8rem;color:rgba(255,255,255,.7);font-size:.65rem;line-height:1.5;text-align:center;">
+              🌿 100% Organic<br>♻️ GRS Certified<br>🌊 Eco Wash
+            </div>
+          </div>
+        </div>
+        <div class="gallery-overlay">
+          <span class="overlay-cat">Labels & Tags</span>
+          <div class="overlay-title">Printed Satin Care Labels</div>
+          <div class="overlay-sub">Recycled Satin · Full Colour Print</div>
+        </div>
+        <div class="overlay-zoom"><i class="bi bi-zoom-in"></i></div>
+      </div>
+
+      <div class="gallery-item short" data-cat="facility" data-title="Quality Control Lab" data-catname="Facility">
+        <div class="gallery-thumb" style="background:linear-gradient(145deg,#1a2a3d,#1a3d2b);padding-bottom:70%;position:relative;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;">
+            <span style="font-size:2.8rem;">🔬</span>
+            <div style="color:var(--white);font-weight:700;font-size:.88rem;">QC Laboratory</div>
+            <div style="color:var(--green-light);font-size:.72rem;">ISO 9001 Certified</div>
+          </div>
+        </div>
+        <div class="gallery-overlay">
+          <span class="overlay-cat">Facility</span>
+          <div class="overlay-title">Quality Control Laboratory</div>
+          <div class="overlay-sub">ISO 9001 · Multi-Point QC</div>
+        </div>
+        <div class="overlay-zoom"><i class="bi bi-zoom-in"></i></div>
+      </div>
+
+      <div class="gallery-item square" data-cat="thread" data-title="Recycled PET Zipper Tapes" data-catname="Thread & Fabric">
+        <div class="gallery-thumb" style="background:linear-gradient(145deg,#1a3d2b,#2e7d52,#1a4d3a);padding-bottom:100%;position:relative;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;">
+            <span style="font-size:3rem;">🔒</span>
+            <div style="color:var(--green-light);font-weight:700;font-size:.9rem;">Zipper Tapes</div>
+            <div style="color:rgba(255,255,255,.5);font-size:.72rem;">Recycled PET</div>
+          </div>
+        </div>
+        <div class="gallery-overlay">
+          <span class="overlay-cat">Thread & Fabric</span>
+          <div class="overlay-title">Recycled PET Zipper Tapes</div>
+          <div class="overlay-sub">GRS Certified · Custom Colours</div>
+        </div>
+        <div class="overlay-zoom"><i class="bi bi-zoom-in"></i></div>
+      </div>
+
+      <div class="gallery-item tall" data-cat="packaging" data-title="Tissue & Wrapping Paper" data-catname="Packaging">
+        <div class="gallery-thumb" style="background:linear-gradient(145deg,#3d2b0a,#6b4c1a,#8b6914);padding-bottom:140%;position:relative;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.7rem;">
+            <span style="font-size:3.5rem;">📜</span>
+            <div style="color:var(--gold);font-weight:700;font-size:.9rem;">Tissue Paper</div>
+            <div style="color:rgba(255,255,255,.55);font-size:.72rem;">Recycled · FSC Certified</div>
+          </div>
+        </div>
+        <div class="gallery-overlay">
+          <span class="overlay-cat">Packaging</span>
+          <div class="overlay-title">Recycled Tissue & Wrapping Paper</div>
+          <div class="overlay-sub">FSC Certified · Custom Print</div>
+        </div>
+        <div class="overlay-zoom"><i class="bi bi-zoom-in"></i></div>
+      </div>
+
+      <div class="gallery-item short" data-cat="buttons" data-title="Bamboo Toggle Buttons" data-catname="Buttons & Trims">
+        <div class="gallery-thumb" style="background:linear-gradient(145deg,#2d4a22,#4a6b2e);padding-bottom:70%;position:relative;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;">
+            <span style="font-size:2.8rem;">🎋</span>
+            <div style="color:rgba(255,255,255,.9);font-weight:700;font-size:.88rem;">Bamboo Buttons</div>
+            <div style="color:rgba(255,255,255,.55);font-size:.72rem;">Sustainable Bamboo</div>
+          </div>
+        </div>
+        <div class="gallery-overlay">
+          <span class="overlay-cat">Buttons & Trims</span>
+          <div class="overlay-title">Bamboo Toggle Buttons</div>
+          <div class="overlay-sub">Sustainable Bamboo · Natural</div>
+        </div>
+        <div class="overlay-zoom"><i class="bi bi-zoom-in"></i></div>
+      </div>
+
+      <div class="gallery-item square" data-cat="certs" data-title="OEKO-TEX & Bluesign Certificates" data-catname="Certifications">
+        <div class="gallery-thumb" style="background:linear-gradient(145deg,#1a3d2b,#2e7d52);padding-bottom:100%;position:relative;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.7rem;">
+            <span style="font-size:3rem;">🛡️</span>
+            <div style="color:var(--white);font-weight:700;font-size:.9rem;text-align:center;">OEKO-TEX<br>Bluesign</div>
+            <div style="display:flex;gap:.5rem;">
+              <div style="background:rgba(200,168,75,.2);border:1px solid rgba(200,168,75,.4);border-radius:12px;padding:.2rem .6rem;color:var(--gold);font-size:.65rem;font-weight:700;">OEKO-TEX</div>
+              <div style="background:rgba(127,200,248,.15);border:1px solid rgba(127,200,248,.3);border-radius:12px;padding:.2rem .6rem;color:#7fc8f8;font-size:.65rem;font-weight:700;">BLUESIGN</div>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-overlay">
+          <span class="overlay-cat">Certifications</span>
+          <div class="overlay-title">OEKO-TEX & Bluesign Certificates</div>
+          <div class="overlay-sub">Skin-Safe · Chemical Responsible</div>
+        </div>
+        <div class="overlay-zoom"><i class="bi bi-zoom-in"></i></div>
+      </div>
+
+      <div class="gallery-item tall" data-cat="labels" data-title="Screen-Printed Fabric Labels" data-catname="Labels & Tags">
+        <div class="gallery-thumb" style="background:linear-gradient(145deg,#1a1a3d,#2a2a6b,#3a3a8b);padding-bottom:140%;position:relative;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.7rem;">
+            <span style="font-size:3.5rem;">🖨️</span>
+            <div style="color:rgba(255,255,255,.9);font-weight:700;font-size:.9rem;">Screen-Printed Labels</div>
+            <div style="color:rgba(200,200,255,.6);font-size:.72rem;">Water-Based Inks</div>
+            <div style="background:rgba(255,255,255,.1);border-radius:8px;padding:.4rem .7rem;color:rgba(255,255,255,.7);font-size:.68rem;">🌿 Bluesign Certified Inks</div>
+          </div>
+        </div>
+        <div class="gallery-overlay">
+          <span class="overlay-cat">Labels & Tags</span>
+          <div class="overlay-title">Screen-Printed Fabric Labels</div>
+          <div class="overlay-sub">Water-Based Inks · Bluesign</div>
+        </div>
+        <div class="overlay-zoom"><i class="bi bi-zoom-in"></i></div>
+      </div>
+
+      <div class="gallery-item short" data-cat="facility" data-title="Sampling & Design Studio" data-catname="Facility">
+        <div class="gallery-thumb" style="background:linear-gradient(145deg,#2a1a0a,#4a3020,#6a4530);padding-bottom:70%;position:relative;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;">
+            <span style="font-size:2.8rem;">🎨</span>
+            <div style="color:rgba(255,255,255,.9);font-weight:700;font-size:.88rem;">Design Studio</div>
+            <div style="color:rgba(255,200,100,.7);font-size:.72rem;">Dhaka HQ</div>
+          </div>
+        </div>
+        <div class="gallery-overlay">
+          <span class="overlay-cat">Facility</span>
+          <div class="overlay-title">Sampling & Design Studio</div>
+          <div class="overlay-sub">Custom Design · Prototyping</div>
+        </div>
+        <div class="overlay-zoom"><i class="bi bi-zoom-in"></i></div>
+      </div>
+
+      <div class="gallery-item square" data-cat="buttons" data-title="Recycled Shell Buttons" data-catname="Buttons & Trims">
+        <div class="gallery-thumb" style="background:linear-gradient(145deg,#1a2a3d,#2a3d4a,#3a4d5a);padding-bottom:100%;position:relative;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.7rem;">
+            <span style="font-size:3rem;">🐚</span>
+            <div style="color:rgba(255,255,255,.9);font-weight:700;font-size:.9rem;">Shell Buttons</div>
+            <div style="color:rgba(200,220,255,.6);font-size:.72rem;">Natural Mother-of-Pearl</div>
+          </div>
+        </div>
+        <div class="gallery-overlay">
+          <span class="overlay-cat">Buttons & Trims</span>
+          <div class="overlay-title">Natural Shell Buttons</div>
+          <div class="overlay-sub">Mother-of-Pearl · Sustainable Harvest</div>
+        </div>
+        <div class="overlay-zoom"><i class="bi bi-zoom-in"></i></div>
+      </div>
+
+      <div class="gallery-item short" data-cat="thread" data-title="Hemp Webbing Straps" data-catname="Thread & Fabric">
+        <div class="gallery-thumb" style="background:linear-gradient(145deg,#2d3d1a,#3d4d2a,#4d5d3a);padding-bottom:70%;position:relative;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;">
+            <span style="font-size:2.8rem;">🌾</span>
+            <div style="color:rgba(255,255,255,.9);font-weight:700;font-size:.88rem;">Hemp Webbing</div>
+            <div style="color:rgba(200,220,160,.6);font-size:.72rem;">100% Natural Hemp</div>
+          </div>
+        </div>
+        <div class="gallery-overlay">
+          <span class="overlay-cat">Thread & Fabric</span>
+          <div class="overlay-title">Hemp Webbing Straps</div>
+          <div class="overlay-sub">100% Hemp · Biodegradable</div>
+        </div>
+        <div class="overlay-zoom"><i class="bi bi-zoom-in"></i></div>
+      </div>
+
+      <div class="gallery-item tall" data-cat="packaging" data-title="Eco Gift Box Collection" data-catname="Packaging">
+        <div class="gallery-thumb" style="background:linear-gradient(145deg,#1a3d2b,#c8a84b22,#254d38);padding-bottom:140%;position:relative;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.7rem;">
+            <span style="font-size:3.5rem;">🎁</span>
+            <div style="color:var(--gold);font-weight:700;font-size:.9rem;">Gift Box Collection</div>
+            <div style="color:var(--green-light);font-size:.72rem;">Recycled Rigid Board</div>
+            <div style="display:flex;flex-direction:column;gap:5px;margin-top:.5rem;">
+              <div style="width:60px;height:10px;background:rgba(200,168,75,.3);border-radius:3px;"></div>
+              <div style="width:50px;height:8px;background:rgba(168,213,181,.3);border-radius:3px;"></div>
+              <div style="width:55px;height:9px;background:rgba(200,168,75,.2);border-radius:3px;"></div>
+            </div>
+          </div>
+        </div>
+        <div class="gallery-overlay">
+          <span class="overlay-cat">Packaging</span>
+          <div class="overlay-title">Eco Gift Box Collection</div>
+          <div class="overlay-sub">Recycled Rigid Board · FSC</div>
+        </div>
+        <div class="overlay-zoom"><i class="bi bi-zoom-in"></i></div>
+      </div>
+
+      <div class="gallery-item short" data-cat="labels" data-title="RFID Eco Tags" data-catname="Labels & Tags">
+        <div class="gallery-thumb" style="background:linear-gradient(145deg,#0d1f17,#1a3d2b);padding-bottom:70%;position:relative;">
+          <div style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:.6rem;">
+            <span style="font-size:2.8rem;">📡</span>
+            <div style="color:var(--green-light);font-weight:700;font-size:.88rem;">RFID Eco Tags</div>
+            <div style="color:rgba(255,255,255,.5);font-size:.72rem;">Recycled Substrate</div>
+          </div>
+        </div>
+        <div class="gallery-overlay">
+          <span class="overlay-cat">Labels & Tags</span>
+          <div class="overlay-title">RFID Eco Tags</div>
+          <div class="overlay-sub">Recycled Substrate · Smart Track</div>
+        </div>
+        <div class="overlay-zoom"><i class="bi bi-zoom-in"></i></div>
+      </div>
+
+    </div><!-- /gallery-grid -->
+
+    <div id="no-results">
+      <i class="bi bi-image"></i>
+      <p>No items found in this category.</p>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════ VIDEO SHOWCASES ══════════ -->
+<section class="video-section">
+  <div class="container">
+    <div class="text-center mb-5 reveal">
+      <div class="section-label mx-auto">Behind the Scenes</div>
+      <h2 class="mt-2">See Our Process<br>in Action</h2>
+      <p class="text-muted mt-2" style="max-width:500px;margin:auto;font-size:.95rem;">From raw recycled materials to finished accessories — watch how we bring sustainability to life.</p>
+    </div>
+    <div class="row g-4">
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="video-card">
+          <div class="video-thumb" style="background:linear-gradient(145deg,#1a3d2b,#2e7d52);">
+            <div class="video-play">
+              <div class="video-play-btn"><i class="bi bi-play-fill"></i></div>
+            </div>
+          </div>
+          <div class="video-body">
+            <span class="video-tag">Production</span>
+            <h6>Label Weaving Process</h6>
+            <p>Watch how our organic cotton woven labels are created on eco-certified looms.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="video-card">
+          <div class="video-thumb" style="background:linear-gradient(145deg,#254d38,#1a3d2b);">
+            <div class="video-play">
+              <div class="video-play-btn"><i class="bi bi-play-fill"></i></div>
+            </div>
+          </div>
+          <div class="video-body">
+            <span class="video-tag">Quality</span>
+            <h6>QC Inspection Walk-Through</h6>
+            <p>Our multi-point quality control process, ensuring zero defects reach our clients.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="video-card">
+          <div class="video-thumb" style="background:linear-gradient(145deg,#1a2a3d,#2a3d5a);">
+            <div class="video-play">
+              <div class="video-play-btn"><i class="bi bi-play-fill"></i></div>
+            </div>
+          </div>
+          <div class="video-body">
+            <span class="video-tag">Sustainability</span>
+            <h6>Recycled Material Journey</h6>
+            <p>From ocean plastic waste to certified GRS buttons — the transformation story.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-sm-6 col-lg-3 reveal">
+        <div class="video-card">
+          <div class="video-thumb" style="background:linear-gradient(145deg,#3d2b0a,#6b4c1a);">
+            <div class="video-play">
+              <div class="video-play-btn"><i class="bi bi-play-fill"></i></div>
+            </div>
+          </div>
+          <div class="video-body">
+            <span class="video-tag">Packaging</span>
+            <h6>Eco Packaging Line</h6>
+            <p>How we pack and export orders using 100% recycled and compostable materials.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CERT MARQUEE ══════════ -->
+<section class="cert-strip">
+  <div style="overflow:hidden;">
+    <div class="cert-marquee">
+      <!-- first set -->
+      <div class="cert-chip"><span class="cert-ico">♻️</span><span>GRS Certified</span></div>
+      <div class="cert-chip"><span class="cert-ico">🌾</span><span>GOTS Certified</span></div>
+      <div class="cert-chip"><span class="cert-ico">🛡️</span><span>OEKO-TEX 100</span></div>
+      <div class="cert-chip"><span class="cert-ico">🌲</span><span>FSC Certified</span></div>
+      <div class="cert-chip"><span class="cert-ico">💧</span><span>Bluesign Approved</span></div>
+      <div class="cert-chip"><span class="cert-ico">✅</span><span>ISO 9001</span></div>
+      <div class="cert-chip"><span class="cert-ico">🌍</span><span>30+ Countries</span></div>
+      <div class="cert-chip"><span class="cert-ico">🤝</span><span>500+ Global Clients</span></div>
+      <!-- duplicate for seamless loop -->
+      <div class="cert-chip"><span class="cert-ico">♻️</span><span>GRS Certified</span></div>
+      <div class="cert-chip"><span class="cert-ico">🌾</span><span>GOTS Certified</span></div>
+      <div class="cert-chip"><span class="cert-ico">🛡️</span><span>OEKO-TEX 100</span></div>
+      <div class="cert-chip"><span class="cert-ico">🌲</span><span>FSC Certified</span></div>
+      <div class="cert-chip"><span class="cert-ico">💧</span><span>Bluesign Approved</span></div>
+      <div class="cert-chip"><span class="cert-ico">✅</span><span>ISO 9001</span></div>
+      <div class="cert-chip"><span class="cert-ico">🌍</span><span>30+ Countries</span></div>
+      <div class="cert-chip"><span class="cert-ico">🤝</span><span>500+ Global Clients</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════ CTA STRIP ══════════ -->
+<section class="cta-section">
+  <div class="container reveal">
+    <h2>Like What You See?</h2>
+    <p>Request samples, ask for a custom quote, or just get in touch — our team is ready to help you find the perfect eco accessories for your brand.</p>
+    <a href="index.html#contact" class="btn-cta-dark">Request Samples</a>
+    <a href="index.html#contact" class="btn-cta-dark" style="background:var(--green-deep);">Get a Quote</a>
+  </div>
+</section>
+
+<!-- ══════════ FOOTER ══════════ -->
+<footer>
+  <div class="container">
+    <div class="row g-4">
+      <div class="col-lg-4">
+        <div class="footer-brand">🌿 Eco <span>Healing</span> Accessories</div>
+        <div class="footer-tagline">We Reuse. We Reduce. We Recycle.</div>
+        <p class="mt-3" style="color:#4a7060;font-size:.88rem;line-height:1.7">One of the largest & committed garments accessories manufacturing companies in Bangladesh — providing customer-friendly, sustainable accessories to the global fashion industry.</p>
+        <div class="mt-3">
+          <a href="#" class="social-btn"><i class="bi bi-facebook"></i></a>
+          <a href="#" class="social-btn"><i class="bi bi-linkedin"></i></a>
+          <a href="#" class="social-btn"><i class="bi bi-whatsapp"></i></a>
+          <a href="#" class="social-btn"><i class="bi bi-envelope"></i></a>
+        </div>
+      </div>
+      <div class="col-6 col-lg-2">
+        <h6>Company</h6>
+        <a href="about.html" class="footer-link">About Us</a>
+        <a href="team.html" class="footer-link">Our Team</a>
+        <a href="gallery.html" class="footer-link">Gallery</a>
+        <a href="index.html#contact" class="footer-link">Contact</a>
+      </div>
+      <div class="col-6 col-lg-3">
+        <h6>Products</h6>
+        <a href="#" class="footer-link">Recycled Labels</a>
+        <a href="#" class="footer-link">Organic Hang Tags</a>
+        <a href="#" class="footer-link">Eco Packaging</a>
+        <a href="#" class="footer-link">Buttons & Trims</a>
+        <a href="#" class="footer-link">Sewing Thread</a>
+      </div>
+      <div class="col-lg-3">
+        <h6>Certifications</h6>
+        <a href="#" class="footer-link"><i class="bi bi-patch-check me-1"></i>GRS Certified</a>
+        <a href="#" class="footer-link"><i class="bi bi-patch-check me-1"></i>OEKO-TEX</a>
+        <a href="#" class="footer-link"><i class="bi bi-patch-check me-1"></i>GOTS</a>
+        <a href="#" class="footer-link"><i class="bi bi-patch-check me-1"></i>FSC</a>
+        <a href="#" class="footer-link"><i class="bi bi-patch-check me-1"></i>Bluesign</a>
+      </div>
+    </div>
+    <hr class="footer-divider"/>
+    <div class="d-flex flex-wrap justify-content-between align-items-center">
+      <div class="footer-bottom">© 2025 Eco Healing Accessories. All rights reserved. Made in Bangladesh 🇧🇩</div>
+      <div class="footer-bottom mt-2 mt-md-0">Reuse · Reduce · Recycle</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ══════════ LIGHTBOX ══════════ -->
+<div class="lightbox" id="lightbox">
+  <button class="lightbox-close" id="lbClose"><i class="bi bi-x-lg"></i></button>
+  <div class="lightbox-counter" id="lbCounter"></div>
+  <div class="lightbox-inner">
+    <button class="lightbox-nav lightbox-prev" id="lbPrev"><i class="bi bi-chevron-left"></i></button>
+    <div>
+      <div class="lightbox-img-wrap" id="lbImg"></div>
+      <div class="lightbox-info">
+        <div class="lightbox-title" id="lbTitle"></div>
+        <span class="lightbox-cat" id="lbCat"></span>
+      </div>
+    </div>
+    <button class="lightbox-nav lightbox-next" id="lbNext"><i class="bi bi-chevron-right"></i></button>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+<script>
+  /* ── Scroll Reveal ── */
+  const revealObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.08 });
+  document.querySelectorAll('.reveal').forEach(el => revealObs.observe(el));
+
+  /* ── Gallery item reveal ── */
+  const itemObs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('in-view'), i * 60);
+      }
+    });
+  }, { threshold: 0.05 });
+  document.querySelectorAll('.gallery-item').forEach(el => itemObs.observe(el));
+
+  /* ── Filter ── */
+  const filterBtns = document.querySelectorAll('.filter-btn');
+  const allItems   = document.querySelectorAll('.gallery-item');
+  const noRes      = document.getElementById('no-results');
+
+  filterBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      filterBtns.forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const cat = btn.dataset.cat;
+      let visible = 0;
+      allItems.forEach(item => {
+        const match = cat === 'all' || item.dataset.cat === cat;
+        item.classList.toggle('hidden', !match);
+        if (match) { visible++; item.classList.remove('in-view'); setTimeout(() => item.classList.add('in-view'), 80); }
+      });
+      noRes.style.display = visible === 0 ? 'block' : 'none';
+    });
+  });
+
+  /* ── Lightbox ── */
+  const lb      = document.getElementById('lightbox');
+  const lbImg   = document.getElementById('lbImg');
+  const lbTitle = document.getElementById('lbTitle');
+  const lbCat   = document.getElementById('lbCat');
+  const lbCtr   = document.getElementById('lbCounter');
+
+  let visibleItems = [];
+  let currentIdx   = 0;
+
+  function openLightbox(item) {
+    visibleItems = Array.from(allItems).filter(i => !i.classList.contains('hidden'));
+    currentIdx   = visibleItems.indexOf(item);
+    showSlide(currentIdx);
+    lb.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    lb.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function showSlide(idx) {
+    const item  = visibleItems[idx];
+    const thumb = item.querySelector('.gallery-thumb');
+    const bg    = getComputedStyle(thumb).background || getComputedStyle(thumb).backgroundImage;
+    lbImg.style.background = getComputedStyle(thumb).background;
+    lbImg.style.backgroundSize = 'cover';
+    lbTitle.textContent = item.dataset.title || '';
+    lbCat.textContent   = item.dataset.catname || '';
+    lbCtr.textContent   = (idx + 1) + ' / ' + visibleItems.length;
+  }
+
+  allItems.forEach(item => {
+    item.addEventListener('click', () => openLightbox(item));
+  });
+  document.getElementById('lbClose').addEventListener('click', closeLightbox);
+  document.getElementById('lbPrev').addEventListener('click', e => {
+    e.stopPropagation();
+    currentIdx = (currentIdx - 1 + visibleItems.length) % visibleItems.length;
+    showSlide(currentIdx);
+  });
+  document.getElementById('lbNext').addEventListener('click', e => {
+    e.stopPropagation();
+    currentIdx = (currentIdx + 1) % visibleItems.length;
+    showSlide(currentIdx);
+  });
+  lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+  document.addEventListener('keydown', e => {
+    if (!lb.classList.contains('open')) return;
+    if (e.key === 'Escape') closeLightbox();
+    if (e.key === 'ArrowLeft') { currentIdx = (currentIdx - 1 + visibleItems.length) % visibleItems.length; showSlide(currentIdx); }
+    if (e.key === 'ArrowRight') { currentIdx = (currentIdx + 1) % visibleItems.length; showSlide(currentIdx); }
+  });
+
+  /* ── Smooth scroll ── */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const t = document.querySelector(a.getAttribute('href'));
+      if (t) { e.preventDefault(); t.scrollIntoView({ behavior: 'smooth', block: 'start' }); }
+    });
+  });
+</script>
+</body>
+</html>
